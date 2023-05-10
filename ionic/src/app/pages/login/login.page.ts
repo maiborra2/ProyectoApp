@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../../services/data.service";
+import {Empresa} from "../../common/Empresa";
 
 @Component({
   selector: 'app-login',
@@ -7,8 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  empresa: any;
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.loadEmpresa();
+  }
+
+
+  private loadEmpresa() {
+    this.dataService.getEmpresa().subscribe(
+      (data: Empresa) => {
+        this.empresa = data;
+      }
+    )
   }
 }
