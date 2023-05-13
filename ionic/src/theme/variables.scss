@@ -20,12 +20,12 @@
   --ion-color-secondary-tint: #50c8ff;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
+  --ion-color-tertiary: #0C0EA0;
+  --ion-color-tertiary-rgb: 12,14,160;
   --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  --ion-color-tertiary-contrast-rgb: 255,255,255;
+  --ion-color-tertiary-shade: #0b0c8d;
+  --ion-color-tertiary-tint: #2426aa;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -74,9 +74,17 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** blueapp **/
+  --ion-color-blueapp: #0b03ff;
+  --ion-color-blueapp-rgb: 11,3,255;
+  --ion-color-blueapp-contrast: #ffffff;
+  --ion-color-blueapp-contrast-rgb: 255,255,255;
+  --ion-color-blueapp-shade: #0a03e0;
+  --ion-color-blueapp-tint: #231cff;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
    * -------------------------------------------
@@ -97,12 +105,12 @@
     --ion-color-secondary-shade: #46b0e0;
     --ion-color-secondary-tint: #62ceff;
 
-    --ion-color-tertiary: #6a64ff;
-    --ion-color-tertiary-rgb: 106,100,255;
+    --ion-color-tertiary: #0C0EA0;
+    --ion-color-tertiary-rgb: 12,14,160;
     --ion-color-tertiary-contrast: #ffffff;
     --ion-color-tertiary-contrast-rgb: 255,255,255;
-    --ion-color-tertiary-shade: #5d58e0;
-    --ion-color-tertiary-tint: #7974ff;
+    --ion-color-tertiary-shade: #0b0c8d;
+    --ion-color-tertiary-tint: #2426aa;
 
     --ion-color-success: #2fdf75;
     --ion-color-success-rgb: 47,223,117;
@@ -145,6 +153,13 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    --ion-color-blueApp: #0b03ff;
+    --ion-color-blueApp-rgb: 11,3,255;
+    --ion-color-blueApp-contrast: #ffffff;
+    --ion-color-blueApp-contrast-rgb: 255,255,255;
+    --ion-color-blueApp-shade: #0a03e0;
+    --ion-color-blueApp-tint: #231cff;
   }
 
   /*
