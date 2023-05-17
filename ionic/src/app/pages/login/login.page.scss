@@ -1,0 +1,58 @@
+#logoImg{
+  width: 70%;
+  display: block;
+  background-color: white;
+  padding: 0 1.5rem;
+  border-radius: 1rem;
+}
+
+ion-item{
+  --border-radius: 0.5rem;
+  --color: black;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  --background: darkblue;
+}
+
+ion-content > *{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+ion-input{
+  --background: white;
+}
+
+ion-content{
+  --ion-background-color: darkblue;
+}
+
+ion-label, ion-checkbox{
+  margin-left: 2rem!important;
+  color: white;
+
+}
+
+.logo{
+  margin: 2rem;
+  width: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+#logInButton{
+  --background: white;
+  --color: black;
+  margin: 1rem;
+  --border-width: 0.1rem ;
+}
+
+#registerButtons > ion-button{
+  margin: 1rem;
+}
+ion-text{
+  color: white;
+}
+

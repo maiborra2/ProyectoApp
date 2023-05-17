@@ -24,3 +24,44 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+
+.logo{
+  margin: 2rem;
+  width: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+ion-content{
+  --ion-background-color: white;
+}
+
+
+#logoImg{
+  width: 70%;
+  display: block;
+  background-color: white;
+  padding: 0 1.5rem;
+  border-radius: 1rem;
+}
+
+ion-card{
+  background-color: white;
+  margin: 0.5rem;
+}
+
+#title {
+  font-size: 3rem;
+  text-align: start;
+  color: black;
+
+}
+
+h1, p {
+  color: black;
+  text-align: center;
+}
