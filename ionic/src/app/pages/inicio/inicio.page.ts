@@ -13,7 +13,7 @@ import Chart from 'chart.js/auto';
 export class InicioPage implements OnInit {
 
   facturas: Factura[] = [];
- //asdhiasudsu
+  //hola
   constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
