@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <ion-row id="head">
+    <ion-col size="1">
+      <ion-icon name="arrow-back" size="large" aria-label="Back"></ion-icon>
+    </ion-col>
+    <ion-col size="10">
+      <h1 id="headTitle" class="ion-text-wrap">Pagar factura</h1>
+    </ion-col>
+  </ion-row>
+
+  <div id="container" class="ion-text-center">
+    <ion-input class="ion-text-center" id="dni" fill="outline" label="Introducir el DNI del titular:" label-placement="stacked"></ion-input>
+    <ion-input class="ion-text-center" id="code" fill="outline" label="Introducir el código de la factura:" label-placement="stacked"></ion-input>
+    <ion-button id="check">Comprobar</ion-button>
+    <ion-button id="scan">Escanear código QR</ion-button>
+  </div>
+  <p class="note">
+    Se notificara al correo electronico y mediante SMS para el cambio de domiciliacion de pago
+  </p>
+</ion-content>

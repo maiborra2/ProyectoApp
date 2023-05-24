@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'gestion',
-        loadChildren: () => import('./pages/gestion/gestion.module').then( m => m.GestionPageModule)
+        loadChildren: () => import('./pages/gestion/gestion.module').then( m => m.GestionPageModule),
       },
       {
         path: 'contacto',
@@ -42,6 +42,38 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'cambiar-plan',
+    loadChildren: () => import('./pages/subpages/cambiar-plan/cambiar-plan.module').then( m => m.CambiarPlanPageModule)
+  },
+  {
+    path: 'mod-datos',
+    loadChildren: () => import('./pages/subpages/mod-datos/mod-datos.module').then( m => m.ModDatosPageModule)
+  },
+  {
+    path: 'pagar-factura',
+    loadChildren: () => import('./pages/subpages/pagar-factura/pagar-factura.module').then( m => m.PagarFacturaPageModule)
+  },
+  {
+    path: 'incidencias',
+    loadChildren: () => import('./pages/subpages/incidencias/incidencias.module').then( m => m.IncidenciasPageModule)
+  },
+  {
+    path: 'consultar-datos',
+    loadChildren: () => import('./pages/subpages/consultar-datos/consultar-datos.module').then( m => m.ConsultarDatosPageModule)
+  },
+  {
+    path: 'cambiar-datos-usuario',
+    loadChildren: () => import('./pages/subpages/cambiar-datos-usuario/cambiar-datos-usuario.module').then( m => m.CambiarDatosUsuarioPageModule)
+  },
+  {
+    path: 'activar-verificacion',
+    loadChildren: () => import('./pages/subpages/activar-verificacion/activar-verificacion.module').then( m => m.ActivarVerificacionPageModule)
+  },
+  {
+    path: 'notificaciones',
+    loadChildren: () => import('./pages/subpages/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
   }
 
 ];
