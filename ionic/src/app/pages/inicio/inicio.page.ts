@@ -13,17 +13,13 @@ import Chart from 'chart.js/auto';
 export class InicioPage implements OnInit {
 
   facturas: Factura[] = [];
-  //comentario de victor
+ //asdhiasudsu
   constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     const userId = '645a046240cc99c1c82a2db1';
     this.loadUserAndFacturas(userId);
     this.generateChart();
-  }
-
-  private load(){
-
   }
 
   private loadFacturas(userId: string) {
