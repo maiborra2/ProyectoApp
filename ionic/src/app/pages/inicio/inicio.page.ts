@@ -22,6 +22,9 @@ export class InicioPage implements OnInit {
     this.generateChart();
   }
 
+  private load(){
+
+  }
 
   private loadFacturas(userId: string) {
     this.dataservice.getFacturasPorUser(userId).subscribe(
