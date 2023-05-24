@@ -5,11 +5,6 @@ import {ActivatedRoute} from "@angular/router";
 import { User } from 'src/app/common/User';
 import Chart from 'chart.js/auto';
 
-
-
-
-
-
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -25,7 +20,7 @@ export class InicioPage implements OnInit {
     this.loadUserAndFacturas(userId);
     this.generateChart();
   }
-  
+
 
   private loadFacturas(userId: string) {
     this.dataservice.getFacturasPorUser(userId).subscribe(
@@ -57,7 +52,7 @@ export class InicioPage implements OnInit {
   private generateChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
-    
+
     if (ctx) {
       new Chart(ctx, {
         type: 'bar', //pie si la queremos redonda
@@ -90,8 +85,4 @@ export class InicioPage implements OnInit {
       });
     }
   }
-  
-  
-  
-
 }

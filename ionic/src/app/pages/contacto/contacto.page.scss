@@ -1,0 +1,17 @@
+.icon{
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+}
+
+ion-card {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-size: 1rem;
+  height: 8rem;
+}
+
+ion-card-content {
+  margin-top: 1rem;
+}
