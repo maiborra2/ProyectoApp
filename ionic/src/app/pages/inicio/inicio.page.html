@@ -29,4 +29,22 @@
     <ion-img src="assets/lersa-telefono.png"></ion-img>
   </div>
   <ion-text><h1>Hola, Aurelio botijo</h1></ion-text>
+  <ion-content class="ion-padding">
+    <ion-item *ngFor="let factura of facturas">
+      <ion-card class="content-card">
+        <ion-card-content class="container-inside-card">
+          <ion-card-content class="container-icon-card">
+            <ion-icon class="icon-card-fact" name="podium-outline" name="podium"></ion-icon>
+          </ion-card-content>
+          <ion-card-content class="container-info-card">
+              <ion-label class="label">Mes: {{factura.mes_factura}}</ion-label><br>
+              <ion-label>Coste: {{factura.coste_mes}}€</ion-label><br>
+          </ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+    <ion-content>
+      <canvas id="myChart"></canvas>
+    </ion-content>
+    
 </ion-content>
