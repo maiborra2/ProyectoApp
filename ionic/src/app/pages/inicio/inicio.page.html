@@ -3,6 +3,11 @@
     <ion-title>inicio</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <div class="logo">
+    <ion-img src="assets/lersa-telefono.png"></ion-img>
+  </div>
+  <ion-text><h1>Hola, Aurelio botijo</h1></ion-text>
 <ion-content class="ion-padding">
   <ion-item *ngFor="let factura of facturas">
     <ion-card class="content-card">
@@ -20,15 +25,12 @@
     </ion-card>
   </ion-item>
   <ion-content>
+  <ion-text><h1>Grafica 1</h1></ion-text>
     <canvas id="myChart"></canvas>
   </ion-content>
 </ion-content>
 
-<ion-content [fullscreen]="true">
-  <div class="logo">
-    <ion-img src="assets/lersa-telefono.png"></ion-img>
-  </div>
-  <ion-text><h1>Hola, Aurelio botijo</h1></ion-text>
+
   <ion-content class="ion-padding">
     <ion-item *ngFor="let factura of facturas">
       <ion-card class="content-card">
@@ -44,7 +46,8 @@
       </ion-card>
     </ion-item>
     <ion-content>
-      <canvas id="myChart"></canvas>
+      <ion-text><h1>Grafica 2</h1></ion-text>
+      <canvas id="myChart2"></canvas>
     </ion-content>
     
 </ion-content>
