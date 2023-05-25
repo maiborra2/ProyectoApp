@@ -9,4 +9,6 @@ export declare class UserService {
     getUser(idUser: string): Promise<User>;
     updateUser(idUser: string, userDto: UserDto): Promise<User>;
     deleteUser(idUser: string): Promise<User>;
+    findUserByEmailAndPassword(email: string, password: string): Promise<User>;
+    updateStartSesion(idUser: string, startSesion: boolean): Promise<User>;
 }

@@ -16,13 +16,14 @@ export class InicioPage implements OnInit {
   //esto es un cambio
   constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    const userId = '645a046240cc99c1c82a2db1';
-    this.loadUserAndFacturas(userId);
-    this.generateChart();
+
+    ngOnInit() {
+    /*const userId = '645a046240cc99c1c82a2db1';
+    this.loadFacturas(userId);*/
+    //this.generateChart();
   }
 
-  private loadFacturas(userId: string) {
+  /*private loadFacturas(userId: string) {
     this.dataservice.getFacturasPorUser(userId).subscribe(
       (data: Factura[]) => {
         this.facturas = data;
@@ -46,29 +47,29 @@ export class InicioPage implements OnInit {
         console.error('Error al cargar el usuario:', error);
       }
     );
-  }
+  }*/
 
   //grafica
-  private generateChart() {
+  /*private generateChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
 
     if (ctx) {
       new Chart(ctx, {
-        type: 'bar', //pie si la queremos redonda
+        type: 'bar',
         data: {
-          labels: ['Semana 1', 'semana 2', 'semana 3', 'semana 4'],
+          labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
           datasets: [
             {
               label: 'Dinero',
-              data: [100],
+              data: [100, 200, 150, 120],
               backgroundColor: 'rgba(0, 123, 255, 0.6)',
               borderColor: 'rgba(0, 123, 255, 1)',
               borderWidth: 1,
             },
             {
               label: 'Gasto de kW',
-              data: [50],
+              data: [50, 80, 60, 70],
               backgroundColor: 'rgba(255, 0, 0, 0.6)',
               borderColor: 'rgba(255, 0, 0, 1)',
               borderWidth: 1,
@@ -84,5 +85,8 @@ export class InicioPage implements OnInit {
         }
       });
     }
-  }
+  }*/
+
+
+
 }

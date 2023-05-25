@@ -12,6 +12,7 @@ export class UserDto {
     fecha_registro: number;
     info_problemas: [string];
     contrasenya: string;
+    inicio_sesion: boolean;
     direccion_usuario:[{
         tipoVia:string;
         calle: string;
@@ -22,5 +23,12 @@ export class UserDto {
         cp: number;
         pais: string;
     },];
+    plan: [{
+        ahorro:boolean;
+        estandard:boolean;
+        premium:boolean;
+        classic: boolean;
+        oficina:boolean;
+    }];
     facturas: FacturaDto[];
 }

@@ -31,5 +31,11 @@ export interface Empresa extends Document{
         {
             pregunta: string;
             respuesta: string;
-        },]
+        },];
+    info_problemas: [
+        {
+            problema: string;
+            fecha: Date;
+        }
+    ]
 }

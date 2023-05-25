@@ -36,6 +36,12 @@ exports.EmpresaSchema = new mongoose_1.Schema({
             pregunta: String,
             respuesta: String
         },
+    ],
+    info_problemas: [
+        {
+            problema: String,
+            fecha: Date
+        }
     ]
 });
 //# sourceMappingURL=empresa.schema.js.map

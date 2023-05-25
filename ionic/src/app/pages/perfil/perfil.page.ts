@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from "../../services/data.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-perfil',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
   }
+
 
 }

@@ -28,4 +28,14 @@ export class UserService {
     async deleteUser(idUser: string): Promise<User>{
         return this.userModel.findByIdAndDelete(idUser);
     }
+
+    async findUserByEmailAndPassword(email: string, password: string): Promise<User> {
+        return this.userModel.findOne({ email, contrasenya: password });
+    }
+
+    async updateStartSesion(idUser: string, startSesion: boolean): Promise<User> {
+        return this.userModel.findByIdAndUpdate(idUser, { inicio_sesion: startSesion }, { new: true });
+    }
+
+
 }

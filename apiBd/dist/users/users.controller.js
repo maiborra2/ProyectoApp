@@ -20,6 +20,25 @@ let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
     }
+    async login(loginData) {
+        const { email, password } = loginData;
+        const user = await this.userService.findUserByEmailAndPassword(email, password);
+        if (user) {
+            user.inicio_sesion = true;
+            await user.save();
+            return { message: 'Inicio de sesión exitoso' };
+        }
+        return { message: 'Credenciales inválidas' };
+    }
+    async logout(idUser) {
+        const user = await this.userService.getUser(idUser);
+        if (user) {
+            user.inicio_sesion = false;
+            await this.userService.updateStartSesion(idUser, false);
+            return { message: 'Cierre de sesión exitoso' };
+        }
+        return { message: 'Usuario no encontrado' };
+    }
     async register(createUserDTO) {
         return await this.userService.create(createUserDTO);
     }
@@ -36,6 +55,20 @@ let UsersController = class UsersController {
         return await this.userService.deleteUser(idUser);
     }
 };
+__decorate([
+    (0, common_1.Post)('user/login'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
+__decorate([
+    (0, common_1.Put)('user/logout/:idUser'),
+    __param(0, (0, common_1.Param)('idUser')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "logout", null);
 __decorate([
     (0, common_1.Post)('user'),
     __param(0, (0, common_1.Body)()),

@@ -34,4 +34,10 @@ export declare class EmpresaDto {
             respuesta: string;
         }
     ];
+    info_problemas: [
+        {
+            problema: string;
+            fecha: Date;
+        }
+    ];
 }

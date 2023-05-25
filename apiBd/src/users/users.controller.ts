@@ -2,9 +2,35 @@ import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {UserService} from "./services/user/user.service";
 import {UserDto} from "./dto/user.dto/user.dto";
 
+
 @Controller('api')
 export class UsersController {
     constructor(private readonly userService: UserService) {}
+
+    @Post('user/login')
+    async login(@Body() loginData: { email: string; password: string }) {
+        const { email, password } = loginData;
+        const user = await this.userService.findUserByEmailAndPassword(email, password);
+        if (user) {
+            user.inicio_sesion = true;
+            await user.save();
+            return { message: 'Inicio de sesión exitoso' };
+        }
+        return { message: 'Credenciales inválidas' };
+    }
+
+    @Put('user/logout/:idUser')
+    async logout(@Param('idUser') idUser: string) {
+        const user = await this.userService.getUser(idUser);
+        if (user) {
+            user.inicio_sesion = false;
+            await this.userService.updateStartSesion(idUser, false);
+            return { message: 'Cierre de sesión exitoso' };
+        }
+        return { message: 'Usuario no encontrado' };
+    }
+
+
     @Post('user')
     async register(@Body() createUserDTO: UserDto) {
         return await this.userService.create(createUserDTO);
@@ -25,6 +51,4 @@ export class UsersController {
     async deleteSerie(@Param('idUser')idUser: string){
         return await this.userService.deleteUser(idUser);
     }
-
-    //ashdiuashd
 }
