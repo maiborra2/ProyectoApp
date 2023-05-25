@@ -61,14 +61,14 @@ export class InicioPage implements OnInit {
           datasets: [
             {
               label: 'Dinero',
-              data: [100],
+              data: [100, 200, 150, 120],
               backgroundColor: 'rgba(0, 123, 255, 0.6)',
               borderColor: 'rgba(0, 123, 255, 1)',
               borderWidth: 1,
             },
             {
               label: 'Gasto de kW',
-              data: [50],
+              data: [50, 70 ,60 ,70],
               backgroundColor: 'rgba(255, 0, 0, 0.6)',
               borderColor: 'rgba(255, 0, 0, 1)',
               borderWidth: 1,
@@ -85,4 +85,24 @@ export class InicioPage implements OnInit {
       });
     }
   }
+  private genChartDonut() {
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    const DATA_COUNT = 3;
+    const myChartColors = ['#FF0000', '#FFA500', '#FFFF00', ];
+    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+    
+    const data = {
+      labels: ['Orange', 'Green', 'Blue'],
+      datasets: [
+        {
+          label: 'Dataset 1',
+           data: [50, 70 ,60],
+          backgroundColor: myChartColors,
+        }
+      ]
+    };
+}
+
+  
 }
