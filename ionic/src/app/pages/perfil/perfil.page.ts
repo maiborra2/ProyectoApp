@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../../services/data.service";
 import { Router } from "@angular/router";
+import {User} from "../../common/User";
+import {Preferences} from "@capacitor/preferences";
+import {ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-perfil',
@@ -9,26 +12,40 @@ import { Router } from "@angular/router";
 })
 export class PerfilPage implements OnInit {
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
   }
 
 
   //FUNCION PARA ENVIAR LOS PROBLEMAS
-  updateProblem(problema: string): void {
-    const updatedUserDto = {
+  async updateProblem(problema: string) {
+    const updatedUserDto: Partial<User> = {
       info_problemas: [problema]
     };
-    //faltaria tener el id del usuario y ponerlo en "idUser"
-    this.dataService.updateUser("idUser", updatedUserDto).subscribe(
-      () => {
-        console.log('Problema enviado con éxito');
-      },
-      (error) => {
-        console.error('Error al enviar el problema', error);
-      }
-    );
+    let userJson
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value)
+    let idUser: any;
+    if (userJson != undefined){
+      idUser = JSON.parse(userJson).id;
+      //faltaria tener el id del usuario y ponerlo en "idUser"
+      this.dataService.updateUser(idUser, updatedUserDto).subscribe(
+        () => {
+          console.log('Problema enviado con éxito');
+        },
+        (error) => {
+          console.error('Error al enviar el problema', error);
+        }
+      );
+    }
+    else {
+      let toast = await this.toastController.create({
+        message: "Ha habido un error",
+        duration: 2000,
+        position: 'bottom'
+      })
+      await toast.present()
+    }
   }
 
 
