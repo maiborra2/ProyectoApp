@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {DataService} from "../../services/data.service";
+
+
 
 @Component({
   selector: 'app-factura',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FacturaPage implements OnInit {
 
-  constructor() { }
+  constructor(private dataservice: DataService, private router: Router) { }
 
   ngOnInit() {
   }
-
+  masDetallesUltimaFactura(){
+    this.router.navigate(['/ultima-factura']);
+  } 
+  consumoAnualGrafica(){
+    this.router.navigate(['/consumo-anual']);
+  }
 }

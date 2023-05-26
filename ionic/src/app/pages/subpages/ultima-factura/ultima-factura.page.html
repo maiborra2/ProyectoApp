@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Última Factura</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Contenido de la página "Última Factura" -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Consumo semanal:</ion-card-title>
+      <ion-card-subtitle><ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="myChartLineUF"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos de pago:</ion-card-title>
+      <ion-card-subtitle><ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="myChartDonUF"></canvas>
+    </ion-card-content>
+    <ion-button fill="outline" ><ion-icon name="add"></ion-icon>Descargar factura en PDF</ion-button><!-- (click)="masDetallesConsumido()" -->
+  </ion-card>
+</ion-content>

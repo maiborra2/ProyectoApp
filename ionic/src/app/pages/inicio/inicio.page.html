@@ -1,24 +1,50 @@
-<ion-content class="ion-padding">
-  <ion-item *ngFor="let factura of facturas">
-    <ion-card class="content-card">
-      <ion-card-content class="container-inside-card">
-        <ion-card-content class="container-icon-card">
-          <ion-icon class="icon-card-fact" name="podium-outline" name="podium"></ion-icon>
-        </ion-card-content>
-        <ion-card-content class="container-info-card">
-          <ion-label class="label">Mes: {{factura.mes_factura}}</ion-label><br>
-          <ion-label>Coste: {{factura.coste_mes}}€</ion-label><br>
-        </ion-card-content>
-      </ion-card-content>
-    </ion-card>
-  </ion-item>
-
-  <canvas id="myChart"></canvas>
-
+<ion-content [fullscreen]="true">
   <div class="logo">
     <ion-img src="assets/lersa-telefono.png"></ion-img>
   </div>
-  <ion-text>
-    <h1>Hola, Aurelio botijo</h1>
-  </ion-text>
+  <ion-text><h1>Hola, Aurelio botijo</h1></ion-text>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Gasto economico actual:</ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="myChartDon"></canvas>
+    </ion-card-content>
+
+    <ion-button fill="outline" (click)="masDetallesConsumido()"><ion-icon name="add"></ion-icon>Mas detalles</ion-button>
+
+  </ion-card>
+   <br>
+   <br>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ultima factura: </ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
+      <!-- <ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br> -->
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="myChart"></canvas>
+    </ion-card-content>
+
+    <ion-button fill="outline" (click)="masDetallesUltimaFactura()"> Mas detalles</ion-button>
+
+  </ion-card>
+    <ion-item *ngFor="let factura of facturas">
+      <ion-card class="content-card">
+        <ion-card-content class="container-inside-card">
+          <ion-card-content class="container-icon-card">
+
+            <ion-icon class="icon-card-fact" name="podium-outline" name="podium"></ion-icon>
+
+          </ion-card-content>
+          <ion-card-content class="container-info-card">
+              <ion-label class="label">Mes: {{factura.mes_factura}}</ion-label><br>
+              <ion-label>Coste: {{factura.coste_mes}}€</ion-label><br>
+          </ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
 </ion-content>
