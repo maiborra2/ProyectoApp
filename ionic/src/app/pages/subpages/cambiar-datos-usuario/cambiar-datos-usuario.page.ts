@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cambiar-datos-usuario',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CambiarDatosUsuarioPage implements OnInit {
 
-  constructor() { }
+  constructor(protected router: Router) { }
 
   ngOnInit() {
   }

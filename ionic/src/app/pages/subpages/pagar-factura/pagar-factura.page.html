@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-row id="head">
     <ion-col size="1">
-      <ion-icon name="arrow-back" size="large" aria-label="Back"></ion-icon>
+      <ion-icon (click)="router.navigateByUrl('menu/gestion')" name="arrow-back" size="large" aria-label="Back"></ion-icon>
     </ion-col>
     <ion-col size="10">
       <h1 id="headTitle" class="ion-text-wrap">Pagar factura</h1>
