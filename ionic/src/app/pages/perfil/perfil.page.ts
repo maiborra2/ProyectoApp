@@ -20,6 +20,7 @@ export class PerfilPage implements OnInit {
     const updatedUserDto = {
       info_problemas: [problema]
     };
+    //faltaria tener el id del usuario y ponerlo en "idUser"
     this.dataService.updateUser("idUser", updatedUserDto).subscribe(
       () => {
         console.log('Problema enviado con éxito');
