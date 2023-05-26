@@ -43,3 +43,12 @@ ion-content > *{
   margin-left: 1rem;
   margin-right: 1rem;
 }
+ion-card-title{
+  font-size: 2em;
+}
+.chart-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

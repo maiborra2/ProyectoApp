@@ -74,7 +74,19 @@ const routes: Routes = [
   {
     path: 'notificaciones',
     loadChildren: () => import('./pages/subpages/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },  {
+    path: 'consumo-actual',
+    loadChildren: () => import('./pages/subpages/consumo-actual/consumo-actual.module').then( m => m.ConsumoActualPageModule)
+  },
+  {
+    path: 'ultima-factura',
+    loadChildren: () => import('./pages/subpages/ultima-factura/ultima-factura.module').then( m => m.UltimaFacturaPageModule)
+  },
+  {
+    path: 'consumo-anual',
+    loadChildren: () => import('./pages/subpages/consumo-anual/consumo-anual.module').then( m => m.ConsumoAnualPageModule)
   }
+
 
 ];
 

@@ -1,6 +1,7 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-padding" id="title">Facturas</h1>
   <div style="margin: 2rem 0">
+    <ion-button fill="clear" class="card-button" (click)="masDetallesUltimaFactura()">
     <ion-card>
       <ion-card-content>
         <ion-icon name="stats-chart" size="large"></ion-icon>
@@ -16,7 +17,8 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
+    </ion-button>
   </div>
   <ion-button fill="outline"><ion-icon name="add"></ion-icon>Facturas anteriores</ion-button>
-  <ion-button fill="outline"><ion-icon name="add"></ion-icon>Consumo anual</ion-button>
+  <ion-button fill="outline" (click)="consumoAnualGrafica()"><ion-icon name="add"></ion-icon>Consumo anual</ion-button>
 </ion-content>

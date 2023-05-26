@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Factura} from "../../common/Factura";
 import {DataService} from "../../services/data.service";
 import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 import { User } from 'src/app/common/User';
 import Chart from 'chart.js/auto';
 
@@ -13,13 +14,20 @@ import Chart from 'chart.js/auto';
 export class InicioPage implements OnInit {
 
   facturas: Factura[] = [];
+
   //esto es un cambio
-  constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
+  constructor(private dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
+
+  
+   }
+ // constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     const userId = '645a046240cc99c1c82a2db1';
     this.loadUserAndFacturas(userId);
     this.generateChart();
+    this.genChartDonut();
+   
   }
 
   private loadFacturas(userId: string) {
@@ -48,7 +56,7 @@ export class InicioPage implements OnInit {
     );
   }
 
-  //grafica
+  //grafica Ultima Factura Inicio
   private generateChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
@@ -61,7 +69,7 @@ export class InicioPage implements OnInit {
           datasets: [
             {
               label: 'Dinero',
-              data: [100, 200, 150, 120],
+              data: [12, 23, 25, 15],
               backgroundColor: 'rgba(0, 123, 255, 0.6)',
               borderColor: 'rgba(0, 123, 255, 1)',
               borderWidth: 1,
@@ -85,24 +93,50 @@ export class InicioPage implements OnInit {
       });
     }
   }
+  // Grafica gasto economico actual 
   private genChartDonut() {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+    const canvas = document.getElementById('myChartDon') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
-    const DATA_COUNT = 3;
-    const myChartColors = ['#FF0000', '#FFA500', '#FFFF00', ];
-    const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+    const myChartColors = ['#98FB98', '#4682B4' ];
     
+   
     const data = {
-      labels: ['Orange', 'Green', 'Blue'],
+      labels: ['Potencia','Consumo' ],
       datasets: [
         {
-          label: 'Dataset 1',
-           data: [50, 70 ,60],
+          label: 'Euros',
+          data: [40, 60],
           backgroundColor: myChartColors,
         }
       ]
     };
-}
+  
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: ''
+            }
+          }
+        }
+      });
+    }
+  }
 
+  //navegacion para mas detalles
+  masDetallesConsumido(){
+    this.router.navigate(['/consumo-actual']);
+  }
+  masDetallesUltimaFactura(){
+    this.router.navigate(['/ultima-factura']);
+  } 
   
 }
