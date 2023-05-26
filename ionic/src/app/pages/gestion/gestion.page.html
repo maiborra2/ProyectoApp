@@ -1,21 +1,21 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-padding" id="title">Gestión</h1>
-    <ion-card class="ion-margin">
+    <ion-card (click)="router.navigateByUrl('cambiar-plan')" class="ion-margin">
       <ion-card-content>
         <h1>Cambiar mi Plan</h1>
       </ion-card-content>
     </ion-card>
-    <ion-card class="ion-margin">
+    <ion-card (click)="router.navigateByUrl('mod-datos')" class="ion-margin">
       <ion-card-content>
         <h1>Modificar datos bancarios</h1>
       </ion-card-content>
     </ion-card>
-    <ion-card class="ion-margin">
+    <ion-card (click)="router.navigateByUrl('incidencias')" class="ion-margin">
       <ion-card-content>
         <h1>Incidencias o reclamaciones</h1>
       </ion-card-content>
     </ion-card>
-    <ion-card class="ion-margin">
+    <ion-card (click)="router.navigateByUrl('pagar-factura')" class="ion-margin">
       <ion-card-content>
         <h1>Pago de facturas</h1>
       </ion-card-content>
