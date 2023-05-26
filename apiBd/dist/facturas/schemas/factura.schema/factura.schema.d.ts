@@ -35,6 +35,7 @@ export declare const FacturaSchema: Schema<any, import("mongoose").Model<any, an
     coste_mes?: number;
     fecha_inicio_mes?: number;
     fecha_fin_mes?: number;
+    pagada?: boolean;
 }, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     semanas: {
         numero_semana?: number;
@@ -47,6 +48,7 @@ export declare const FacturaSchema: Schema<any, import("mongoose").Model<any, an
     coste_mes?: number;
     fecha_inicio_mes?: number;
     fecha_fin_mes?: number;
+    pagada?: boolean;
 }>> & Omit<import("mongoose").FlatRecord<{
     semanas: {
         numero_semana?: number;
@@ -59,6 +61,7 @@ export declare const FacturaSchema: Schema<any, import("mongoose").Model<any, an
     coste_mes?: number;
     fecha_inicio_mes?: number;
     fecha_fin_mes?: number;
+    pagada?: boolean;
 }> & {
     _id: import("mongoose").Types.ObjectId;
 }, never>>;

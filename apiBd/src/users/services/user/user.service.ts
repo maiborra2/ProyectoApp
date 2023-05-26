@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {User} from "../../interfaces/user/user.interface";
 import {UserDto} from "../../dto/user.dto/user.dto";
+import {FacturaDto} from "../../../facturas/dto/factura.dto/factura.dto";
 
 @Injectable()
 export class UserService {
@@ -35,6 +36,16 @@ export class UserService {
 
     async updateStartSesion(idUser: string, startSesion: boolean): Promise<User> {
         return this.userModel.findByIdAndUpdate(idUser, { inicio_sesion: startSesion }, { new: true });
+    }
+
+    async updateUserByDNI(dni: string, cuenta_bancaria: string): Promise<User> {
+        return this.userModel.findOneAndUpdate({ dni }, { cuenta_bancaria }, { new: true });
+    }
+
+    async isFacturaPagada(dni: string, facturaId: string): Promise<boolean> {
+        const user = await this.userModel.findOne({ dni }).exec();
+        const factura = user.facturas.find((factura) => factura.id === facturaId);
+        return factura.pagada;
     }
 
 

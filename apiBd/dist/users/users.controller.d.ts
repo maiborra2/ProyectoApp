@@ -17,4 +17,6 @@ export declare class UsersController {
     getUser(idUser: string): Promise<import("./interfaces/user/user.interface").User>;
     updateUser(idUser: string, userDto: UserDto): Promise<import("./interfaces/user/user.interface").User>;
     deleteSerie(idUser: string): Promise<import("./interfaces/user/user.interface").User>;
+    updateUserByDNI(dni: string, cuenta_bancaria: string): Promise<import("./interfaces/user/user.interface").User>;
+    isFacturaPagada(dni: string, facturaId: string): Promise<boolean>;
 }

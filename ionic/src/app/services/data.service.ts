@@ -33,5 +33,26 @@ export class DataService {
     return this.http.put<any>(`${this.BASE_URL}/user/logout/${idUser}`, {});
   }
 
+  updateUser(idUser: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/modificar/${idUser}`;
+    return this.http.put<User>(url, {});
+  }
+
+  deleteUser(idUser: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/borrar/${idUser}`;
+    return this.http.delete<User>(url);
+  }
+
+  updateUserByDNI(dni: string, cuenta_bancaria: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/modificar-cuenta/${dni}`;
+    const body = { cuenta_bancaria: cuenta_bancaria };
+    return this.http.put<User>(url, body);
+  }
+  getFacturasPagadasPorDNI(dni: string, facturaId: string): Observable<Factura[]> {
+    const url = `${this.BASE_URL}/users/${dni}/facturas?pagada=true&id=${facturaId}`;
+    return this.http.get<Factura[]>(url);
+  }
+
+
 
 }

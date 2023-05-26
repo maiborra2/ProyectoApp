@@ -11,4 +11,6 @@ export declare class UserService {
     deleteUser(idUser: string): Promise<User>;
     findUserByEmailAndPassword(email: string, password: string): Promise<User>;
     updateStartSesion(idUser: string, startSesion: boolean): Promise<User>;
+    updateUserByDNI(dni: string, cuenta_bancaria: string): Promise<User>;
+    isFacturaPagada(dni: string, facturaId: string): Promise<boolean>;
 }

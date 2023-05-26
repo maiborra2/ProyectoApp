@@ -1,16 +1,15 @@
 import { Document } from 'mongoose';
 export interface Factura extends Document{
-    mes_factura:string;
+    mes_factura: string;
     anyo_factura: number;
     consumoKw_mes: number;
     coste_mes: number;
     fecha_inicio_mes: number;
     fecha_fin_mes: number;
-    semanas:[
-        {
-            numero_semana: number;
-            consumoKw_semana: number;
-            coste_semana: number;
-        },
-    ];
+    pagada: boolean;
+    semanas: {
+        numero_semana: number;
+        consumoKw_semana: number;
+        coste_semana: number;
+    }[];
 }

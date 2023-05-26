@@ -51,4 +51,18 @@ export class UsersController {
     async deleteSerie(@Param('idUser')idUser: string){
         return await this.userService.deleteUser(idUser);
     }
+
+    @Put('users/modificar/cuenta/:dni')
+    async updateUserByDNI(@Param('dni') dni: string, @Body('cuentaBancaria') cuenta_bancaria: string) {
+        return this.userService.updateUserByDNI(dni, cuenta_bancaria);
+    }
+
+    @Get('users/:dni/facturas/:facturaId/pagada')
+    async isFacturaPagada(
+        @Param('dni') dni: string,
+        @Param('facturaId') facturaId: string,
+    ): Promise<boolean> {
+        return await this.userService.isFacturaPagada(dni, facturaId);
+    }
+
 }
