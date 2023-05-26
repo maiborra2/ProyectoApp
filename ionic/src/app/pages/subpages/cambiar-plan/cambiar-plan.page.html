@@ -12,13 +12,36 @@
     Para activar o desactivar el plan se hara una verificacion en la central para aceptar tu solicitud de cambio de plan una vez cambiado recibiiras un correo en tu bandeja de entrada del correo con el que te registrastes como usuario.
   </p>
   <ion-card id="options">
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap ion-text-center">
-          Plan económico de ahorro anual
-        </ion-label>
-      </ion-item>
-      <ion-item lines="full"><ion-label class="ion-text-wrap ion-text-center">Elegir plan que más se adapte a tus necesidades</ion-label></ion-item>
-      <ion-item lines="full"><ion-label class="ion-text-wrap ion-text-center">Plan para Oficinas y Empresas</ion-label></ion-item>
-      <ion-item lines="none"><ion-label class="ion-text-wrap ion-text-center">Placas solares</ion-label></ion-item>
+      <ion-item id="plan-ahorro" lines="full"><ion-label class="ion-text-wrap ion-text-center">Plan económico de ahorro anual</ion-label></ion-item>
+      <ion-item id="elegir-plan" lines="full"><ion-label class="ion-text-wrap ion-text-center">Elige el plan que más se adapte a tus necesidades</ion-label></ion-item>
+      <ion-item id="plan-oficinas" lines="full"><ion-label class="ion-text-wrap ion-text-center">Plan para Oficinas y Empresas</ion-label></ion-item>
+      <ion-item id="plan-placas" lines="none"><ion-label class="ion-text-wrap ion-text-center">Placas solares</ion-label></ion-item>
   </ion-card>
+
+  <ion-alert
+    trigger="plan-ahorro"
+    header="Plan económico de ahorro anual"
+    message="Lo que hayas no hayas consumido durante el año te lo descontaremos al siguiente dividido entre los proximos 12 meses. Consultar las condiciones generales en el apartado de preguntas precuentes o pongase en contacto con nosotros para mas informacion."
+    [inputs]="planAhorroInputs"
+  ></ion-alert>
+
+  <ion-alert
+    trigger="elegir-plan"
+    header="Elige el plan que más se adapte a tus necesidades"
+    message=""
+    [inputs]="elegirPlanInputs"
+  ></ion-alert>
+
+  <ion-alert
+    trigger="plan-oficinas"
+    header="Plan para Oficinas y Empresas"
+    message="Por cada bloque de oficinas contratado se hará una reducción de precio. Esta operación debe ser realizada con un operario de la empresa."
+  ></ion-alert>
+
+  <ion-alert
+    trigger="plan-placas"
+    header="Placas solares"
+    message="La instalación es gratuita y el seguro incluye revisiones anuales. Consulte con nosotros para más información"
+  ></ion-alert>
+
 </ion-content>
