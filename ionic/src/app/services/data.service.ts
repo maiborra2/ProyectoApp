@@ -13,6 +13,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  //ya tenemos las facturas dentro del usuario, no hace falta
   getFacturasPorUser(id: string): Observable<Factura[]>{
     return this.http.get<Factura[]>(this.BASE_URL+'/facturas/user/'+id)
   }
@@ -23,5 +24,40 @@ export class DataService {
 
   getUser(idUser: string): Observable<User> {
     return this.http.get<User>(this.BASE_URL+'/users/'+idUser);
-}
+  }
+
+  loginUser(email: string, password: string): Observable<User> {
+    return this.http.post<User>(`${this.BASE_URL}/user/login`, { email, password });
+  }
+
+  logoutUser(idUser: string): Observable<any> {
+    return this.http.put<any>(`${this.BASE_URL}/user/logout/${idUser}`, {});
+  }
+
+  /*updateUser(idUser: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/modificar/${idUser}`;
+    return this.http.put<User>(url, {});
+  }*/
+
+  //podemos cambiar varios datos del usuario (para cambiar los datos del usuario en perfil)
+  updateUser(idUser: string, updatedUserDto: Partial<User>): Observable<User> {
+    const url = `${this.BASE_URL}/users/modificar/${idUser}`;
+
+    return this.http.put<User>(url, updatedUserDto);
+  }
+
+  deleteUser(idUser: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/borrar/${idUser}`;
+    return this.http.delete<User>(url);
+  }
+
+  updateUserByDNI(dni: string, cuenta_bancaria: string): Observable<User> {
+    const url = `${this.BASE_URL}/users/modificar-cuenta/${dni}`;
+    const body = { cuenta_bancaria: cuenta_bancaria };
+    return this.http.put<User>(url, body);
+  }
+  getFacturasPagadasPorDNI(dni: string, facturaId: string): Observable<Factura[]> {
+    const url = `${this.BASE_URL}/users/${dni}/facturas?pagada=true&id=${facturaId}`;
+    return this.http.get<Factura[]>(url);
+  }
 }
