@@ -1,6 +1,7 @@
 import { Document } from 'mongoose';
 import {Factura} from "../../../facturas/interfaces/factura/factura.interface";
 export interface User extends Document{
+    save(): unknown;
     _id:string;
     dni: string;
     nombre: string;

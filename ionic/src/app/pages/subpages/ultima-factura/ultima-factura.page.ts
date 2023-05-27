@@ -21,6 +21,7 @@ export class UltimaFacturaPage implements OnInit {
       coste_mes: 50,
       fecha_inicio_mes: 1620144000,
       fecha_fin_mes: 1622822399,
+      pagada:true,
       semanas: [
         {
           numero_semana: 1,
@@ -31,18 +32,18 @@ export class UltimaFacturaPage implements OnInit {
       ],
     };
   }
-  
+
 
 
   //graficas
   ngOnInit() {
     this.lineChartUF(); // Llamar al método para generar la gráfica
     this.genChartDonutUF();
-    
-  
+
+
   }
 
-  //grafica Consumo semanal 
+  //grafica Consumo semanal
   private lineChartUF() {
     const DATA_COUNT = 4;
     const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 24 };
@@ -118,8 +119,8 @@ export class UltimaFacturaPage implements OnInit {
     const canvas = document.getElementById('myChartDonUF') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
     const myChartColors = ['#98FB98', '#FFD700'	,'#FF8C00' ,'#4682B4' ];
-    
-   
+
+
     const data = {
       labels: ['Impuesto de electricidad','Energia consumida','IVA (21%)','Tarifa de la potencia contratada' ],
       datasets: [
@@ -130,7 +131,7 @@ export class UltimaFacturaPage implements OnInit {
         }
       ]
     };
-  
+
     if (ctx) {
       new Chart(ctx, {
         type: 'doughnut',
