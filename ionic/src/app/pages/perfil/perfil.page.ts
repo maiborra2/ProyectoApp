@@ -20,6 +20,9 @@ export class PerfilPage implements OnInit {
     {
       text: 'OK',
       role: 'confirm',
+      handler: () => {
+        this.deleteUser();
+      },
     },
   ]
 
@@ -35,9 +38,11 @@ export class PerfilPage implements OnInit {
     {
       text: 'Enviar informe',
       role: 'confirm',
-      handler: (informarProblemaInputs: {informeProblema: string}) => {
-
+      handler: async (informarProblemaInputs: { informeProblema: string }) => {
+        const informeProblema = informarProblemaInputs.informeProblema;
+        await this.updateProblem(informeProblema);
       }
+
     }
   ]
   politicaPrivacidad = "Política de privacidad\n" +
@@ -77,6 +82,7 @@ export class PerfilPage implements OnInit {
       text: 'OK',
       role: 'confirm',
       handler: () => {
+        this.cerrarSesion();
       },
     },
   ]
@@ -86,6 +92,69 @@ export class PerfilPage implements OnInit {
 
   ngOnInit() {
   }
+
+  async cerrarSesion() {
+    const updatedUserDto: Partial<User> = {
+      inicio_sesion: false
+    };
+    let idUser;
+    let userJson;
+    await Preferences.get({ key: 'user' }).then(data => userJson = data);
+    if (userJson !== undefined) {
+      try {
+        const parsedUserJson = JSON.parse(userJson);
+        idUser = parsedUserJson.id;
+        this.dataService.updateUser(idUser, updatedUserDto).subscribe(
+          () => {
+            console.log('Sesión cerrada con éxito');
+          },
+          (error) => {
+            console.error('Error al cerrar sesión', error);
+          }
+        );
+      } catch (error) {
+        console.error('Error al analizar la cadena JSON', error);
+      }
+    } else {
+      let toast = await this.toastController.create({
+        message: "Ha habido un error",
+        duration: 2000,
+        position: "bottom"
+      });
+      await toast.present();
+    }
+  }
+
+
+  /*async cerrarSesion() {
+    const updatedUserDto: Partial<User> = {
+      inicio_sesion: false
+    };
+    let idUser
+    let userJson
+    await Preferences.get({key: 'user'}).then(data => userJson = data)
+    if (userJson != undefined){
+      idUser = JSON.parse(userJson)._id;
+      //faltaria tener el id del usuario y ponerlo en "idUser"
+      this.dataService.updateUser(idUser,updatedUserDto ).subscribe(
+        () => {
+          console.log('Problema enviado con éxito');
+        },
+        (error) => {
+          console.error('Error al enviar el problema', error);
+        }
+      );
+    }
+    else {
+      let toast = await this.toastController.create({
+        message: "Ha habido un error",
+        duration: 2000,
+        position: "bottom"
+      })
+
+      await toast.present()
+    }
+  }*/
 
   //FUNCION PARA ENVIAR LOS PROBLEMAS
   async updateProblem(problema: string) {
@@ -119,17 +188,27 @@ export class PerfilPage implements OnInit {
   }
 
   //FUNCION PARA BORRAR LA CUENTA
-  deleteUser(idUser: string): void {
-    this.dataService.deleteUser(idUser).subscribe(
-      (): void => {
-        console.log('Usuario eliminado con éxito');
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        console.error('Error al eliminar el usuario', error);
-      }
-    )
+  async deleteUser(): Promise<void> {
+    let idUser: string;
+    let userJson: string;
+
+    const { value } = await Preferences.get({ key: 'user' });
+    if (value) {
+      userJson = value;
+      idUser = JSON.parse(userJson).id;
+
+      this.dataService.deleteUser(idUser).subscribe(
+        (): void => {
+          console.log('Usuario eliminado con éxito');
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Error al eliminar el usuario', error);
+        }
+      );
+    }
   }
+
 
 
 }

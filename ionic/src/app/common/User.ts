@@ -1,8 +1,6 @@
 import { Factura } from "./Factura";
-
-
 export interface User {
-  _id: string;
+  _id?: string;
   dni: string;
   nombre: string;
   apellido1: string;

@@ -85,6 +85,10 @@ const routes: Routes = [
   {
     path: 'consumo-anual',
     loadChildren: () => import('./pages/subpages/consumo-anual/consumo-anual.module').then( m => m.ConsumoAnualPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/subpages/register/register.module').then( m => m.RegisterPageModule)
   }
 
 

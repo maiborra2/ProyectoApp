@@ -13,6 +13,11 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  createUser(user: User): Observable<User> {
+    const url = `${this.BASE_URL}/user`;
+    return this.http.post<User>(url, user);
+  }
+
   //ya tenemos las facturas dentro del usuario, no hace falta
   getFacturasPorUser(id: string): Observable<Factura[]>{
     return this.http.get<Factura[]>(this.BASE_URL+'/facturas/user/'+id)

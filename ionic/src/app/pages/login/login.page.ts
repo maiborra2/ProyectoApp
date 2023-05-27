@@ -24,6 +24,10 @@ export class LoginPage implements OnInit {
 
   }
 
+  onRegisterButtonClick() {
+    this.router.navigate(['/register']);
+  }
+
   login(email: string, password: string): void {
     this.dataService.loginUser(email, password).subscribe(
       (response: any) => {

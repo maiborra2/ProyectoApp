@@ -1,7 +1,7 @@
 import {FacturaDto} from "../../../facturas/dto/factura.dto/factura.dto";
 
 export class UserDto {
-    _id: string;
+    _id?: string;
     dni: string;
     nombre: string;
     apellido1: string;

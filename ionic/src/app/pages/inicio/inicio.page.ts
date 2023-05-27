@@ -16,6 +16,7 @@ export class InicioPage implements OnInit {
   facturas: Factura[] = [];
 
   //esto es un cambio
+   user: User | undefined;
   constructor(private dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
 
 
@@ -32,7 +33,7 @@ export class InicioPage implements OnInit {
     this.dataservice.getFacturasPorUser(userId).subscribe(
       (data: Factura[]) => {
         this.facturas = data;
-        console.log(this.facturas); // Solo para verificar si se obtienen las inicio correctamente
+        console.log(this.facturas);
       },
       (error) => {
         console.error('Error al cargar las inicio:', error);
@@ -42,6 +43,7 @@ export class InicioPage implements OnInit {
   private loadUserAndFacturas(userId: string) {
     this.dataservice.getUser(userId).subscribe(
       (user: User) => {
+        this.user = user;
         console.log('Usuario:', user); // Verificar si se obtiene el usuario correctamente
 
         // Obtener las facturas del usuario
@@ -52,6 +54,12 @@ export class InicioPage implements OnInit {
         console.error('Error al cargar el usuario:', error);
       }
     );
+  }
+  getNombreCompleto(): string {
+    if (this.user) {
+      return `${this.user.nombre} ${this.user.apellido1} ${this.user.apellido2}`;
+    }
+    return '';
   }
 
   //grafica

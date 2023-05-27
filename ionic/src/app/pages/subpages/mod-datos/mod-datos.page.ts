@@ -41,8 +41,6 @@ export class ModDatosPage implements OnInit {
     if (dni.equals((document.getElementById('dni') as HTMLInputElement).value)) {
       await this.cambiarCuentaAlert();
     }
-
-
   }
 
   async cambiarCuentaAlert() {
