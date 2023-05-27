@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {Empresa} from "../../common/Empresa";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import {Preferences} from '@capacitor/preferences';
 
 @Component({
@@ -12,10 +12,11 @@ import {Preferences} from '@capacitor/preferences';
 export class LoginPage implements OnInit {
 
   empresa: any;
-  @ViewChild('emailInput', { static: true }) emailInput: any;
-  @ViewChild('passwordInput', { static: true }) passwordInput: any;
+  @ViewChild('emailInput', {static: true}) emailInput: any;
+  @ViewChild('passwordInput', {static: true}) passwordInput: any;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router) {
+  }
 
   ngOnInit() {
     this.loadEmpresa();
@@ -47,8 +48,8 @@ export class LoginPage implements OnInit {
     this.login(email, password);
   }
 
- iniciarSesion() {
-   //funcion para iniciar sesion sin usuario
+  iniciarSesion() {
+    //funcion para iniciar sesion sin usuario
     this.router.navigate(['/menu/inicio']);
   }
 

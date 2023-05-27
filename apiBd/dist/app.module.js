@@ -19,7 +19,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://victorbisquertmoscardo:victorbisquertmoscardo@cluster0.z2f2sji.mongodb.net/?retryWrites=true&w=majority'),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://root:admin@cluster0.dnv4dhd.mongodb.net/?retryWrites=true&w=majority'),
             users_module_1.UsersModule,
             facturas_module_1.FacturasModule,
             empresas_module_1.EmpresasModule

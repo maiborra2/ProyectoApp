@@ -60,4 +60,5 @@ export class DataService {
     const url = `${this.BASE_URL}/users/${dni}/facturas?pagada=true&id=${facturaId}`;
     return this.http.get<Factura[]>(url);
   }
+
 }

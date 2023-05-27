@@ -25,6 +25,7 @@ export class PerfilPage implements OnInit {
 
   informarProblemaInputs = [
     {
+      name:'informeProblema',
       type: 'textarea',
       placeholder: 'Escriba su reclamación',
     }
@@ -34,7 +35,8 @@ export class PerfilPage implements OnInit {
     {
       text: 'Enviar informe',
       role: 'confirm',
-      handler: () => {
+      handler: (informarProblemaInputs: {informeProblema: string}) => {
+
       }
     }
   ]
