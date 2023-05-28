@@ -14,15 +14,15 @@ export class IncidenciasPage implements OnInit {
   constructor(protected router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-
+    this.getIncidencias();
   }
 
   async getIncidencias() {
-    let idUser
+    let idUser: string='';
     let userJson
-    await Preferences.get({key: 'user'}).then(data => userJson = data)
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value)
     if (userJson != undefined){
-      idUser = JSON.parse(userJson).id
+      idUser = userJson
     }
     this.dataService.getUser(idUser).subscribe(
       {next: value => {

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { DataService } from "../../../services/data.service";
 import { User } from "../../../common/User";
 import { ModalController } from '@ionic/angular';
+import {Preferences} from "@capacitor/preferences";
 
 @Component({
   selector: 'app-cambiar-plan',
@@ -38,8 +39,13 @@ export class CambiarPlanPage implements OnInit {
     this.mostrarPlanAhorro = false;
   }
 
-  activarAhorro() {
-    const userId = '645a046240cc99c1c82a2db1';
+  async activarAhorro() {
+    let userId = '';
+    let useJson;
+    await Preferences.get({key: 'user'}).then(data => useJson = data.value);
+    if(useJson != undefined){
+      userId = useJson;
+    }
     const ahorroCheckbox = this.planAhorroInputs[0];
     const ahorro = ahorroCheckbox.checked;
 
@@ -70,8 +76,14 @@ export class CambiarPlanPage implements OnInit {
     this.mostrarElegirPlan = false;
   }
 
-  activarPlan() {
-    const userId = '645a046240cc99c1c82a2db1';
+  async activarPlan() {
+    let userId: string = '';
+    let userJson;
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value);
+    if(userJson != undefined){
+      console.log(userJson);
+      userId = userJson
+    }
 
     this.dataService.getUser(userId).subscribe(
       (user: User) => {

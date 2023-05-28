@@ -9,11 +9,10 @@
   </ion-row>
 
   <div id="container" class="ion-text-center">
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Contraseña" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Dirección" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked"></ion-input>
-    <ion-button>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Contraseña" label-placement="stacked" [value]="contrasenya" type="password"></ion-input>
+    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked" [value]="email"></ion-input>
+    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked" [value]="telefono"></ion-input>
+    <ion-button (click)="restablecerContrasenyaAlert()">
       Restablecer contraseña
     </ion-button>
     <ion-button>

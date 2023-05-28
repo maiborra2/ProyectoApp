@@ -36,8 +36,8 @@ let UserService = class UserService {
     async deleteUser(idUser) {
         return this.userModel.findByIdAndDelete(idUser);
     }
-    async findUserByEmailAndPassword(email, password) {
-        return this.userModel.findOne({ email, contrasenya: password });
+    async findUserByEmailAndPassword(email) {
+        return this.userModel.findOne({ email });
     }
     async updateStartSesion(idUser, startSesion) {
         return this.userModel.findByIdAndUpdate(idUser, { inicio_sesion: startSesion }, { new: true });

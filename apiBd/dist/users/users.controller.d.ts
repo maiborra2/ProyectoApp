@@ -3,10 +3,7 @@ import { UserDto } from "./dto/user.dto/user.dto";
 export declare class UsersController {
     private readonly userService;
     constructor(userService: UserService);
-    login(loginData: {
-        email: string;
-        password: string;
-    }): Promise<{
+    login(email: string): Promise<import("./interfaces/user/user.interface").User | {
         message: string;
     }>;
     logout(idUser: string): Promise<{

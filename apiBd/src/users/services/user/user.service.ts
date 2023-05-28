@@ -31,8 +31,8 @@ export class UserService {
         return this.userModel.findByIdAndDelete(idUser);
     }
 
-    async findUserByEmailAndPassword(email: string, password: string): Promise<User> {
-        return this.userModel.findOne({ email, contrasenya: password });
+    async findUserByEmailAndPassword(email: string, ): Promise<User> {
+        return this.userModel.findOne({email});
     }
 
     async updateStartSesion(idUser: string, startSesion: boolean): Promise<User> {

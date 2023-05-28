@@ -28,16 +28,19 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  login(email: string, password: string): void {
-    this.dataService.loginUser(email, password).subscribe(
-      (response: any) => {
+  async login(email: string, password: string) {
+    this.dataService.loginUser(email).subscribe(
+      async (response: any) => {
         // Autenticación exitosa, hacer algo con la respuesta
         console.log(response);
-        Preferences.set({
-          key: 'user',
-          value: response
-        })
-        this.router.navigate(['/menu/inicio']); // Redirigir al usuario a la página de inicio
+        if(response.contrasenya == password){
+          await Preferences.set({
+            key: 'user',
+            value: response._id
+          })
+          await Preferences.get({key: 'user'}).then(data=>console.log(data));
+          this.router.navigate(['/menu/inicio']); // Redirigir al usuario a la página de inicio
+        }
       },
       (error) => {
         // Manejar el error de autenticación

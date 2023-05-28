@@ -20,13 +20,10 @@ let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
     }
-    async login(loginData) {
-        const { email, password } = loginData;
-        const user = await this.userService.findUserByEmailAndPassword(email, password);
+    async login(email) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
         if (user) {
-            user.inicio_sesion = true;
-            await user.save();
-            return { message: 'Inicio de sesión exitoso' };
+            return user;
         }
         return { message: 'Credenciales inválidas' };
     }
@@ -62,10 +59,10 @@ let UsersController = class UsersController {
     }
 };
 __decorate([
-    (0, common_1.Post)('user/login'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('user/login/:email'),
+    __param(0, (0, common_1.Param)('email')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
 __decorate([

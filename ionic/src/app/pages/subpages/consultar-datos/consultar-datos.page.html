@@ -9,12 +9,11 @@
   </ion-row>
 
   <div id="container" class="ion-text-center">
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Nombre completo" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Contraseña" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="DNI" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Correo electrónico" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Direccion" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Telefono" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Usuario desde" label-placement="stacked"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Nombre completo" label-placement="stacked" [value]="nombre_completo"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Contraseña" label-placement="stacked" [value]="contrasenya" type="password"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="DNI" label-placement="stacked" [value]="dni"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Correo electrónico" label-placement="stacked" [value]="email"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Telefono" label-placement="stacked" [value]="telefono"></ion-input>
+    <ion-input class="ion-text-center" readonly="true" fill="outline" label="Usuario desde" label-placement="stacked" [value]="fecha_registro"></ion-input>
   </div>
 </ion-content>

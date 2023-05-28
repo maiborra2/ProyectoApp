@@ -31,8 +31,8 @@ export class DataService {
     return this.http.get<User>(this.BASE_URL+'/users/'+idUser);
   }
 
-  loginUser(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.BASE_URL}/user/login`, { email, password });
+  loginUser(email: string): Observable<User> {
+    return this.http.get<User>(`${this.BASE_URL}/user/login/`+email);
   }
 
   logoutUser(idUser: string): Observable<any> {

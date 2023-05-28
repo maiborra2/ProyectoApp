@@ -9,14 +9,11 @@ import {UserDto} from "./dto/user.dto/user.dto";
 export class UsersController {
     constructor(private readonly userService: UserService) {}
 
-    @Post('user/login')
-    async login(@Body() loginData: { email: string; password: string }) {
-        const { email, password } = loginData;
-        const user = await this.userService.findUserByEmailAndPassword(email, password);
+    @Get('user/login/:email')
+    async login(@Param('email') email: string) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
         if (user) {
-            user.inicio_sesion = true;
-            await user.save();
-            return { message: 'Inicio de sesión exitoso' };
+            return  user;
         }
         return { message: 'Credenciales inválidas' };
     }

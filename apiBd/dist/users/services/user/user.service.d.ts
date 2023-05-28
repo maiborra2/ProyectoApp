@@ -9,7 +9,7 @@ export declare class UserService {
     getUser(idUser: string): Promise<User>;
     updateUser(idUser: string, userDto: UserDto): Promise<User>;
     deleteUser(idUser: string): Promise<User>;
-    findUserByEmailAndPassword(email: string, password: string): Promise<User>;
+    findUserByEmailAndPassword(email: string): Promise<User>;
     updateStartSesion(idUser: string, startSesion: boolean): Promise<User>;
     updateUserByDNI(dni: string, cuenta_bancaria: string): Promise<User>;
     isFacturaPagada(dni: string, facturaId: string): Promise<boolean>;

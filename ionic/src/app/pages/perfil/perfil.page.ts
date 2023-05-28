@@ -94,35 +94,8 @@ export class PerfilPage implements OnInit {
   }
 
   async cerrarSesion() {
-    const updatedUserDto: Partial<User> = {
-      inicio_sesion: false
-    };
-    let idUser;
-    let userJson;
-    await Preferences.get({ key: 'user' }).then(data => userJson = data);
-    if (userJson !== undefined) {
-      try {
-        const parsedUserJson = JSON.parse(userJson);
-        idUser = parsedUserJson.id;
-        this.dataService.updateUser(idUser, updatedUserDto).subscribe(
-          () => {
-            console.log('Sesión cerrada con éxito');
-          },
-          (error) => {
-            console.error('Error al cerrar sesión', error);
-          }
-        );
-      } catch (error) {
-        console.error('Error al analizar la cadena JSON', error);
-      }
-    } else {
-      let toast = await this.toastController.create({
-        message: "Ha habido un error",
-        duration: 2000,
-        position: "bottom"
-      });
-      await toast.present();
-    }
+    await Preferences.remove({ key: 'user' });
+    this.router.navigateByUrl('login')
   }
 
 
@@ -163,9 +136,9 @@ export class PerfilPage implements OnInit {
     };
     let idUser
     let userJson
-    await Preferences.get({key: 'user'}).then(data => userJson = data)
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value)
     if (userJson != undefined){
-      idUser = JSON.parse(userJson).id
+      idUser = userJson
       //faltaria tener el id del usuario y ponerlo en "idUser"
       this.dataService.updateUser(idUser,updatedUserDto ).subscribe(
         () => {
@@ -189,14 +162,12 @@ export class PerfilPage implements OnInit {
 
   //FUNCION PARA BORRAR LA CUENTA
   async deleteUser(): Promise<void> {
-    let idUser: string;
-    let userJson: string;
+    let idUser: string = '';
+    let userJson;
 
-    const { value } = await Preferences.get({ key: 'user' });
-    if (value) {
-      userJson = value;
-      idUser = JSON.parse(userJson).id;
-
+    await Preferences.get({ key: 'user' }).then(data => userJson = data.value);
+    if(userJson != undefined){
+      idUser = userJson;
       this.dataService.deleteUser(idUser).subscribe(
         (): void => {
           console.log('Usuario eliminado con éxito');
