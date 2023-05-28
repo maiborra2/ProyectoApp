@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {EmpresaService} from "./services/empresa/empresa.service";
 import {EmpresaDto} from "./dto/empresa.dto/empresa.dto";

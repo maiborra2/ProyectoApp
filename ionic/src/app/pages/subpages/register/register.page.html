@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="container-form">
+  <div class="scroll-content">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Primer apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="apellido1"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Segundo Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="apellido2"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">DNI</ion-label>
+      <ion-input type="text" [(ngModel)]="dni"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input type="tel" [(ngModel)]="telefono"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="contrasenya"></ion-input>
+    </ion-item>
+
+    <div class="ion-text-center">
+      <ion-button shape="round" (click)="registrarUsuario()">Confirmar</ion-button>
+    </div>
+  </div>
+</ion-content>

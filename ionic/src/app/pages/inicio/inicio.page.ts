@@ -13,19 +13,19 @@ import { AfterViewInit } from '@angular/core';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit{
-  
+
   facturas: Factura[] = [];
   chartData: Factura[] = [];
   //esto es un cambio
+   user: User | undefined;
   constructor(private dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
 
-  
-   }
- // constructor(private dataservice: DataService, private activatedRoute: ActivatedRoute) { }
 
+   }
   ngOnInit() {
     const userId = '645a046240cc99c1c82a2db1';
     this.loadUserAndFacturas(userId);
+//<<<<<<< HEAD
     this.loadData(userId);
     this.updateCharts();
   }
@@ -39,7 +39,7 @@ export class InicioPage implements OnInit{
     this.dataservice.getFacturasPorUser(userId).subscribe(
       (data: Factura[]) => {
         this.facturas = data;
-        console.log(this.facturas); // Solo para verificar si se obtienen las inicio correctamente
+        console.log(this.facturas);
       },
       (error) => {
         console.error('Error al cargar las inicio:', error);
@@ -49,6 +49,7 @@ export class InicioPage implements OnInit{
   private loadUserAndFacturas(userId: string) {
     this.dataservice.getUser(userId).subscribe(
       (user: User) => {
+        this.user = user;
         console.log('Usuario:', user); // Verificar si se obtiene el usuario correctamente
 
         // Obtener las facturas del usuario
@@ -61,14 +62,21 @@ export class InicioPage implements OnInit{
       }
     );
   }
+  getNombreCompleto(): string {
+    if (this.user) {
+      return `${this.user.nombre} ${this.user.apellido1} ${this.user.apellido2}`;
+    }
+    return '';
+  }
 
+//<<<<<<< HEAD
   //navegacion para mas detalles
   masDetallesConsumido(){
     this.router.navigate(['/consumo-actual']);
   }
   masDetallesUltimaFactura(){
     this.router.navigate(['/ultima-factura']);
-  } 
+  }
 
   loadData(userId: string) {
     this.dataservice.getChartData(userId).subscribe(
@@ -104,6 +112,7 @@ export class InicioPage implements OnInit{
 
     if (ctx) {
       new Chart(ctx, {
+//<<<<<<< HEAD
         type: 'doughnut',
         data: dataDon,
         options: {
@@ -124,7 +133,7 @@ export class InicioPage implements OnInit{
     // GRAFICA BARRA
 
 
-    
+
     if (ctx) {
        // Obtén los datos de número de semana, consumoKw_semana y coste_semana de las facturas en this.chartData
     const canvas2 = document.getElementById('myChartBar') as HTMLCanvasElement;
@@ -133,7 +142,7 @@ export class InicioPage implements OnInit{
     const semanas = this.facturas.map(factura => factura.semanas.map(semana => semana.numero_semana)).reduce((acc, val) => acc.concat(val), []);
     const consumoKwSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.consumoKw_semana)).reduce((acc, val) => acc.concat(val), []);
     const costeSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.coste_semana)).reduce((acc, val) => acc.concat(val), []);
-    
+
       new Chart(ctx2, {
         type: 'bar',
         data: {
@@ -148,6 +157,7 @@ export class InicioPage implements OnInit{
             },
             {
               label: 'Gasto de kW',
+//<<<<<<< HEAD
               data: consumoKwSemanas.reduce,
               backgroundColor: myChartColors,
               borderColor: 'rgba(255, 0, 0, 1)',
@@ -165,6 +175,8 @@ export class InicioPage implements OnInit{
       });
     }
   }
+//<<<<<<< HEAD
   }
-  
-}
+
+    }
+

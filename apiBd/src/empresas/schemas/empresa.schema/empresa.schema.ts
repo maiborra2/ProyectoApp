@@ -30,5 +30,11 @@ export const EmpresaSchema = new Schema({
     {
         pregunta: String,
         respuesta: String
-    },]
+    },],
+    info_problemas: [
+        {
+            problema: String,
+            fecha: Date
+        }
+    ]
 })

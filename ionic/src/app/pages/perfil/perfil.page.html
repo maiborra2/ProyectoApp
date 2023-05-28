@@ -1,30 +1,65 @@
 <ion-content [fullscreen]="true">
 
   <h1 class="ion-padding" id="title">Perfil</h1>
-  <ion-list ><ion-item>
-    <ion-label>Consultar datos del usuario</ion-label>
-    <ion-icon name="person-circle" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Cambiar datos del usuario</ion-label>
-    <ion-icon name="key" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Activar la verificación</ion-label>
-    <ion-icon name="lock-closed" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Solicitud de eliminación de cuenta</ion-label>
-    <ion-icon name="trash" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Informar de un problema</ion-label>
-    <ion-icon name="alert-circle" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Notificaciones</ion-label>
-    <ion-icon name="notifications" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Informacion de política y privacidad</ion-label>
-    <ion-icon name="information" size="large" slot="end"></ion-icon>
-  </ion-item><ion-item>
-    <ion-label>Cerrar sesión</ion-label>
-    <ion-icon name="log-out" size="large" slot="end"></ion-icon>
-  </ion-item>
+  <ion-list>
+    <ion-item (click)="router.navigateByUrl('consultar-datos')">
+      <ion-label>Consultar datos del usuario</ion-label>
+      <ion-icon name="person-circle" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="router.navigateByUrl('cambiar-datos-usuario')">
+      <ion-label>Cambiar datos del usuario</ion-label>
+      <ion-icon name="key" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="router.navigateByUrl('activar-verificacion')">
+      <ion-label>Activar la verificación</ion-label>
+      <ion-icon name="lock-closed" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item id="eliminar-cuenta">
+      <ion-label>Solicitud de eliminación de cuenta</ion-label>
+      <ion-icon name="trash" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item id="informar-problema">
+      <ion-label>Informar de un problema</ion-label>
+      <ion-icon name="alert-circle" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item (click)="router.navigateByUrl('notificaciones')">
+      <ion-label>Notificaciones</ion-label>
+      <ion-icon name="notifications" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item id="politica-privacidad">
+      <ion-label>Informacion de política y privacidad</ion-label>
+      <ion-icon name="information" size="large" slot="end"></ion-icon>
+    </ion-item>
+    <ion-item id="cerrar-sesion">
+      <ion-label>Cerrar sesión</ion-label>
+      <ion-icon name="log-out" size="large" slot="end"></ion-icon>
+    </ion-item>
   </ion-list>
+
+  <ion-alert
+    trigger="eliminar-cuenta"
+    header="¿Quieres eliminar tu cuenta de la App?"
+    message="Esta acción no tiene marcha atrás"
+    [buttons]="eliminarCuentaButtons"
+  ></ion-alert>
+
+  <ion-alert
+    trigger="informar-problema"
+    header="Informar de un problema"
+    [inputs]="informarProblemaInputs"
+    [buttons]="informarProblemaButtons"
+  ></ion-alert>
+
+  <ion-alert
+    trigger="politica-privacidad"
+    header="Política de privacidad"
+    [message]="politicaPrivacidad"
+  ></ion-alert>
+
+  <ion-alert
+    trigger="cerrar-sesion"
+    header="Cerrar sesión"
+    message="¿Quieres salir de esta cuenta?"
+    [buttons]="cerrarSesionButtons"
+  ></ion-alert>
 </ion-content>

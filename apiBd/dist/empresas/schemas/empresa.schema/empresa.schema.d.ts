@@ -24,6 +24,10 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { Schema } from 'mongoose';
 export declare const EmpresaSchema: Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
+    info_problemas: {
+        problema?: string;
+        fecha?: Date;
+    }[];
     direccion: {
         tipoVia?: string;
         calle?: string;
@@ -52,6 +56,10 @@ export declare const EmpresaSchema: Schema<any, import("mongoose").Model<any, an
     img_logo?: string;
     telefono_at_cliente?: string;
 }, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
+    info_problemas: {
+        problema?: string;
+        fecha?: Date;
+    }[];
     direccion: {
         tipoVia?: string;
         calle?: string;
@@ -80,6 +88,10 @@ export declare const EmpresaSchema: Schema<any, import("mongoose").Model<any, an
     img_logo?: string;
     telefono_at_cliente?: string;
 }>> & Omit<import("mongoose").FlatRecord<{
+    info_problemas: {
+        problema?: string;
+        fecha?: Date;
+    }[];
     direccion: {
         tipoVia?: string;
         calle?: string;

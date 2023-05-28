@@ -7,13 +7,15 @@ exports.FacturaSchema = new mongoose_1.Schema({
     anyo_factura: Number,
     consumoKw_mes: Number,
     coste_mes: Number,
-    fecha_inicio_mes: Number, fecha_fin_mes: Number,
+    fecha_inicio_mes: Number,
+    fecha_fin_mes: Number,
+    pagada: Boolean,
     semanas: [
         {
             numero_semana: Number,
             consumoKw_semana: Number,
-            coste_semana: Number
-        }
-    ]
+            coste_semana: Number,
+        },
+    ],
 });
 //# sourceMappingURL=factura.schema.js.map

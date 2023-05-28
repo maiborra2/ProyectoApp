@@ -20,6 +20,22 @@ let UsersController = class UsersController {
     constructor(userService) {
         this.userService = userService;
     }
+    async login(email) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
+        if (user) {
+            return user;
+        }
+        return { message: 'Credenciales inválidas' };
+    }
+    async logout(idUser) {
+        const user = await this.userService.getUser(idUser);
+        if (user) {
+            user.inicio_sesion = false;
+            await this.userService.updateStartSesion(idUser, false);
+            return { message: 'Cierre de sesión exitoso' };
+        }
+        return { message: 'Usuario no encontrado' };
+    }
     async register(createUserDTO) {
         return await this.userService.create(createUserDTO);
     }
@@ -35,7 +51,27 @@ let UsersController = class UsersController {
     async deleteSerie(idUser) {
         return await this.userService.deleteUser(idUser);
     }
+    async updateUserByDNI(dni, cuenta_bancaria) {
+        return this.userService.updateUserByDNI(dni, cuenta_bancaria);
+    }
+    async isFacturaPagada(dni, facturaId) {
+        return await this.userService.isFacturaPagada(dni, facturaId);
+    }
 };
+__decorate([
+    (0, common_1.Get)('user/login/:email'),
+    __param(0, (0, common_1.Param)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
+__decorate([
+    (0, common_1.Put)('user/logout/:idUser'),
+    __param(0, (0, common_1.Param)('idUser')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "logout", null);
 __decorate([
     (0, common_1.Post)('user'),
     __param(0, (0, common_1.Body)()),
@@ -71,6 +107,22 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "deleteSerie", null);
+__decorate([
+    (0, common_1.Put)('users/modificar/cuenta/:dni'),
+    __param(0, (0, common_1.Param)('dni')),
+    __param(1, (0, common_1.Body)('cuentaBancaria')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "updateUserByDNI", null);
+__decorate([
+    (0, common_1.Get)('users/:dni/facturas/:facturaId/pagada'),
+    __param(0, (0, common_1.Param)('dni')),
+    __param(1, (0, common_1.Param)('facturaId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "isFacturaPagada", null);
 UsersController = __decorate([
     (0, common_1.Controller)('api'),
     __metadata("design:paramtypes", [user_service_1.UserService])

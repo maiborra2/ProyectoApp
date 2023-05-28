@@ -3,7 +3,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card>
+        <ion-card (click)="showInfo(ids[0])">
           <ion-card-content>
             <h1>Teléfono</h1>
             <div class="icon">
@@ -13,18 +13,18 @@
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card>
+        <ion-card (click)="showInfo(ids[1])">
           <ion-card-content>
-            <h1>Chat</h1>
+            <h1>Correo</h1>
             <div class="icon">
-              <ion-icon name="chatbox" size="large"></ion-icon>
+              <ion-icon name="mail" size="large"></ion-icon>
             </div>
           </ion-card-content>
         </ion-card></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card>
+        <ion-card (click)="showInfo(ids[2])">
           <ion-card-content>
             <h1>Oficinas</h1>
             <div class="icon">
@@ -33,14 +33,53 @@
           </ion-card-content>
         </ion-card></ion-col>
       <ion-col>
-        <ion-card>
+        <ion-card (click)="showInfo(ids[3])">
           <ion-card-content>
             <h1>FAQ</h1>
             <div class="icon">
               <ion-icon name="help-circle" size="large"></ion-icon>
             </div>
           </ion-card-content>
-        </ion-card></ion-col>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card [id]="ids[0]"  class="info">
+          <ion-card-content>
+            <div class="icon">
+              <ion-icon name="call" size="large"></ion-icon>
+            </div>
+            <h1><b>Teléfono oficina</b></h1>
+            <h1>963 456 789</h1>
+            <h1><b>Atención al cliente</b></h1>
+            <h1>963 600 852</h1>
+          </ion-card-content>
+        </ion-card>
+        <ion-card [id]="ids[1]"  class="info">
+          <ion-card-content>
+            <div class="icon">
+              <ion-icon name="mail" size="large"></ion-icon>
+            </div>
+            <h1><b>Correo corporativo</b></h1>
+            <h1>lersaelectricitat@lersa.com</h1>
+            <h1><b>Atención al cliente</b></h1>
+            <h1>atencionalcliente@lersa.com</h1>
+          </ion-card-content>
+        </ion-card>
+        <iframe [id]="ids[2]"  class="info" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2955.666715564978!2d2.1876765750323752!3d42.20019314518826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a53f73e141001b%3A0x14d8fb4cbbe5ee9c!2sComercializadora%20Lersa%20S%20L!5e0!3m2!1ses!2ses!4v1685122083012!5m2!1ses!2ses" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <ion-list [id]="ids[3]"  class="info">
+          <div *ngFor="let item of items">
+            <ion-item (click)="showAlert(item.question, item.answer)">
+              <ion-text>{{item.question}}</ion-text>
+              <ion-icon name="person-circle" size="large" slot="end"></ion-icon>
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -5,6 +5,7 @@ export declare class FacturaDto {
     coste_mes: number;
     fecha_inicio_mes: number;
     fecha_fin_mes: number;
+    pagada: boolean;
     semanas: [
         {
             numero_semana: number;

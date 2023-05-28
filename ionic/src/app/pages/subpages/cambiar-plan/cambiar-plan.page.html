@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-row id="head">
     <ion-col size="1">
-      <ion-icon name="arrow-back" size="large" aria-label="Back"></ion-icon>
+      <ion-icon (click)="router.navigateByUrl('menu/gestion')" name="arrow-back" size="large" aria-label="Back"></ion-icon>
     </ion-col>
     <ion-col size="10">
       <h1 id="headTitle" class="ion-text-wrap">Cambiar mi plan</h1>
@@ -12,13 +12,77 @@
     Para activar o desactivar el plan se hara una verificacion en la central para aceptar tu solicitud de cambio de plan una vez cambiado recibiiras un correo en tu bandeja de entrada del correo con el que te registrastes como usuario.
   </p>
   <ion-card id="options">
-      <ion-item lines="full">
-        <ion-label class="ion-text-wrap ion-text-center">
-          Plan económico de ahorro anual
-        </ion-label>
-      </ion-item>
-      <ion-item lines="full"><ion-label class="ion-text-wrap ion-text-center">Elegir plan que más se adapte a tus necesidades</ion-label></ion-item>
-      <ion-item lines="full"><ion-label class="ion-text-wrap ion-text-center">Plan para Oficinas y Empresas</ion-label></ion-item>
-      <ion-item lines="none"><ion-label class="ion-text-wrap ion-text-center">Placas solares</ion-label></ion-item>
+    <ion-item id="plan-ahorro" lines="full" (click)="mostrarPlanAhorroModal()">
+      <ion-label class="ion-text-wrap ion-text-center">Plan económico de ahorro anual</ion-label>
+    </ion-item>
+    <ion-item id="elegir-plan" lines="full" (click)="mostrarElegirPlanModal()">
+      <ion-label class="ion-text-wrap ion-text-center">Elige el plan que más se adapte a tus necesidades</ion-label>
+    </ion-item>
+      <ion-item id="plan-oficinas" lines="full"><ion-label class="ion-text-wrap ion-text-center">Plan para Oficinas y Empresas</ion-label></ion-item>
+      <ion-item id="plan-placas" lines="none"><ion-label class="ion-text-wrap ion-text-center">Placas solares</ion-label></ion-item>
   </ion-card>
+
+  <ng-container *ngIf="mostrarPlanAhorro">
+    <div class="plan-modal" (click)="cerrarPlanAhorroModal()">
+      <div class="plan-modal-content" (click)="$event.stopPropagation()">
+        <h2>Plan económico de ahorro anual</h2>
+        <p>Lo que hayas no hayas consumido durante el año te lo descontaremos al siguiente dividido entre los próximos 12 meses.</p>
+        <p>Consultar las condiciones generales en el apartado de preguntas frecuentes o póngase en contacto con nosotros para más información.</p>
+        <div class="plan-modal-actions">
+          <ion-item>
+            <ion-label>Activar</ion-label>
+            <ion-checkbox [(ngModel)]="planAhorroInputs[0].checked" (ionChange)="activarAhorro()"></ion-checkbox>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="mostrarElegirPlan">
+    <div class="plan-modal-types" (click)="cerrarElegirPlanModal()">
+      <div class="plan-types-modal-content" (click)="$event.stopPropagation()">
+        <h2>Elige el plan que más se adapte a tus necesidades</h2>
+        <p>Aquí puedes seleccionar el plan que mejor se ajuste a tus requerimientos y preferencias.</p>
+        <ion-list>
+          <ion-radio-group [(ngModel)]="selectedPlan">
+            <ion-item class="ion-text-wrap">
+              <ion-label>Estándar</ion-label>
+              <ion-radio slot="start" value="estandar"></ion-radio>
+            </ion-item>
+            <ion-item class="ion-text-wrap">
+              <ion-label>Premium</ion-label>
+              <ion-radio slot="start" value="premium"></ion-radio>
+            </ion-item>
+            <ion-item class="ion-text-wrap">
+              <ion-label>Classic</ion-label>
+              <ion-radio slot="start" value="classic"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+        <div class="plan-modal-actions">
+          <ion-checkbox expand="full" color="primary" (click)="activarPlan()">Activar</ion-checkbox>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!--<ion-alert
+    trigger="elegir-plan"
+    header="Elige el plan que más se adapte a tus necesidades"
+    message=""
+    [inputs]="elegirPlanInputs"
+  ></ion-alert> -->
+
+  <ion-alert
+    trigger="plan-oficinas"
+    header="Plan para Oficinas y Empresas"
+    message="Por cada bloque de oficinas contratado se hará una reducción de precio. Esta operación debe ser realizada con un operario de la empresa."
+  ></ion-alert>
+
+  <ion-alert
+    trigger="plan-placas"
+    header="Placas solares"
+    message="La instalación es gratuita y el seguro incluye revisiones anuales. Consulte con nosotros para más información"
+  ></ion-alert>
+
 </ion-content>

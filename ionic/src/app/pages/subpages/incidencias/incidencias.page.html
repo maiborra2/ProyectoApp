@@ -1,18 +1,17 @@
 <ion-content [fullscreen]="true">
   <ion-row id="head">
     <ion-col size="1">
-      <ion-icon name="arrow-back" size="large" aria-label="Back"></ion-icon>
+      <ion-icon (click)="router.navigateByUrl('menu/gestion')" name="arrow-back" size="large" aria-label="Back"></ion-icon>
     </ion-col>
     <ion-col size="10">
-      <h1 id="headTitle" class="ion-text-wrap">Modificar datos bancarios</h1>
+      <h1 id="headTitle" class="ion-text-wrap">Incidencias</h1>
     </ion-col>
   </ion-row>
 
   <ion-list>
-    <ion-item lines="full" *ngFor="let i of [1,1,1,1]">
+    <ion-item lines="full" *ngFor="let i of incidencias">
       <div>
-        <p>Incidencia:</p>
-        <p>Lorem ipsum</p>
+        <p>{{i}}</p>
       </div>
     </ion-item>
   </ion-list>

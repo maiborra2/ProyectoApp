@@ -1,11 +1,12 @@
 export class FacturaDto {
-    mes_factura:string;
+    mes_factura: string;
     anyo_factura: number;
     consumoKw_mes: number;
     coste_mes: number;
     fecha_inicio_mes: number;
     fecha_fin_mes: number;
-    semanas:[
+    pagada: boolean;
+    semanas: [
         {
             numero_semana: number;
             consumoKw_semana: number;
@@ -13,3 +14,4 @@ export class FacturaDto {
         },
     ];
 }
+

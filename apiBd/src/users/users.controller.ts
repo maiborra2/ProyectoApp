@@ -1,10 +1,35 @@
+
+// @ts-ignore
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {UserService} from "./services/user/user.service";
 import {UserDto} from "./dto/user.dto/user.dto";
 
+
 @Controller('api')
 export class UsersController {
     constructor(private readonly userService: UserService) {}
+
+    @Get('user/login/:email')
+    async login(@Param('email') email: string) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
+        if (user) {
+            return  user;
+        }
+        return { message: 'Credenciales inválidas' };
+    }
+
+    @Put('user/logout/:idUser')
+    async logout(@Param('idUser') idUser: string) {
+        const user = await this.userService.getUser(idUser);
+        if (user) {
+            user.inicio_sesion = false;
+            await this.userService.updateStartSesion(idUser, false);
+            return { message: 'Cierre de sesión exitoso' };
+        }
+        return { message: 'Usuario no encontrado' };
+    }
+
+
     @Post('user')
     async register(@Body() createUserDTO: UserDto) {
         return await this.userService.create(createUserDTO);
@@ -26,5 +51,17 @@ export class UsersController {
         return await this.userService.deleteUser(idUser);
     }
 
-    //ashdiuashd
+    @Put('users/modificar/cuenta/:dni')
+    async updateUserByDNI(@Param('dni') dni: string, @Body('cuentaBancaria') cuenta_bancaria: string) {
+        return this.userService.updateUserByDNI(dni, cuenta_bancaria);
+    }
+
+    @Get('users/:dni/facturas/:facturaId/pagada')
+    async isFacturaPagada(
+        @Param('dni') dni: string,
+        @Param('facturaId') facturaId: string,
+    ): Promise<boolean> {
+        return await this.userService.isFacturaPagada(dni, facturaId);
+    }
+
 }

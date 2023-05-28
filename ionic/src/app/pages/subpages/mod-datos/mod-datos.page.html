@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-row id="head">
     <ion-col size="1">
-      <ion-icon name="arrow-back" size="large" aria-label="Back"></ion-icon>
+      <ion-icon (click)="router.navigateByUrl('menu/gestion')" name="arrow-back" size="large" aria-label="Back"></ion-icon>
     </ion-col>
     <ion-col size="10">
       <h1 id="headTitle" class="ion-text-wrap">Modificar datos bancarios</h1>
@@ -10,7 +10,7 @@
 
   <div id="container" class="ion-text-center">
     <ion-input class="ion-text-center" id="dni" fill="outline" label="Introducir el DNI del titular:" label-placement="stacked"></ion-input>
-    <ion-button>
+    <ion-button (click)="comprobarDni()">
       Comprobar
     </ion-button>
   </div>

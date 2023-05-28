@@ -10,6 +10,7 @@ export const UserSchema = new Schema({
     fecha_registro: Number,
     info_problemas: [String],
     contrasenya: String,
+    inicio_sesion: Boolean,
     direccion_usuario:[{
         tipoVia:String,
         calle: String,
@@ -19,6 +20,13 @@ export const UserSchema = new Schema({
         provincia: String,
         cp: Number,
         pais: String,
+    }],
+    plan: [{
+        ahorro:Boolean,
+        estandard:Boolean,
+        premium:Boolean,
+        classic: Boolean,
+        oficina:Boolean,
     }],
     facturas: [{
         mes_factura:String,

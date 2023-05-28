@@ -35,6 +35,13 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
         cp?: number;
         pais?: string;
     }[];
+    plan: {
+        ahorro?: boolean;
+        estandard?: boolean;
+        premium?: boolean;
+        classic?: boolean;
+        oficina?: boolean;
+    }[];
     facturas: {
         semanas: {
             numero_semana?: number;
@@ -57,6 +64,7 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
     cuenta_bancaria?: string;
     fecha_registro?: number;
     contrasenya?: string;
+    inicio_sesion?: boolean;
 }, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<{
     info_problemas: string[];
     direccion_usuario: {
@@ -69,6 +77,13 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
         cp?: number;
         pais?: string;
     }[];
+    plan: {
+        ahorro?: boolean;
+        estandard?: boolean;
+        premium?: boolean;
+        classic?: boolean;
+        oficina?: boolean;
+    }[];
     facturas: {
         semanas: {
             numero_semana?: number;
@@ -91,6 +106,7 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
     cuenta_bancaria?: string;
     fecha_registro?: number;
     contrasenya?: string;
+    inicio_sesion?: boolean;
 }>> & Omit<import("mongoose").FlatRecord<{
     info_problemas: string[];
     direccion_usuario: {
@@ -103,6 +119,13 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
         cp?: number;
         pais?: string;
     }[];
+    plan: {
+        ahorro?: boolean;
+        estandard?: boolean;
+        premium?: boolean;
+        classic?: boolean;
+        oficina?: boolean;
+    }[];
     facturas: {
         semanas: {
             numero_semana?: number;
@@ -125,6 +148,7 @@ export declare const UserSchema: Schema<any, import("mongoose").Model<any, any, 
     cuenta_bancaria?: string;
     fecha_registro?: number;
     contrasenya?: string;
+    inicio_sesion?: boolean;
 }> & {
     _id: import("mongoose").Types.ObjectId;
 }, never>>;

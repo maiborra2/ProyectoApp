@@ -13,6 +13,7 @@ exports.UserSchema = new mongoose_1.Schema({
     fecha_registro: Number,
     info_problemas: [String],
     contrasenya: String,
+    inicio_sesion: Boolean,
     direccion_usuario: [{
             tipoVia: String,
             calle: String,
@@ -22,6 +23,13 @@ exports.UserSchema = new mongoose_1.Schema({
             provincia: String,
             cp: Number,
             pais: String,
+        }],
+    plan: [{
+            ahorro: Boolean,
+            estandard: Boolean,
+            premium: Boolean,
+            classic: Boolean,
+            oficina: Boolean,
         }],
     facturas: [{
             mes_factura: String,

@@ -36,6 +36,20 @@ let UserService = class UserService {
     async deleteUser(idUser) {
         return this.userModel.findByIdAndDelete(idUser);
     }
+    async findUserByEmailAndPassword(email) {
+        return this.userModel.findOne({ email });
+    }
+    async updateStartSesion(idUser, startSesion) {
+        return this.userModel.findByIdAndUpdate(idUser, { inicio_sesion: startSesion }, { new: true });
+    }
+    async updateUserByDNI(dni, cuenta_bancaria) {
+        return this.userModel.findOneAndUpdate({ dni }, { cuenta_bancaria }, { new: true });
+    }
+    async isFacturaPagada(dni, facturaId) {
+        const user = await this.userModel.findOne({ dni }).exec();
+        const factura = user.facturas.find((factura) => factura.id === facturaId);
+        return factura.pagada;
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
