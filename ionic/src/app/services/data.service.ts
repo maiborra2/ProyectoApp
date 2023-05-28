@@ -4,16 +4,16 @@ import {Observable} from "rxjs";
 import {Factura} from "../common/Factura";
 import {Empresa} from "../common/Empresa";
 import { User } from '../common/User';
-import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DataService {
   BASE_URL = 'http://localhost:3000/api';
-  public factura: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   createUser(user: User): Observable<User> {
     const url = `${this.BASE_URL}/user`;
@@ -34,10 +34,6 @@ export class DataService {
   }
 
   loginUser(email: string): Observable<User> {
-    return this.http.get<User>(`${this.BASE_URL}/user/login/`+email);
-  }
-
-  verificacionUser(email: string): Observable<User> {
     return this.http.get<User>(`${this.BASE_URL}/user/login/`+email);
   }
 
@@ -78,13 +74,6 @@ export class DataService {
     return this.http.get<Factura[]>(url);
   }
   
-
-
-  public mostrarFactura(factura: any){
-    this.factura = factura;
-    console.log(this.factura);
-    this.router.navigateByUrl("ultima-factura");
-  }
 
 
 }

@@ -4,18 +4,21 @@
   </div>
   <ion-text><h1>Hola, {{ getNombreCompleto() }}</h1></ion-text>
 
+
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Gasto economico actual:</ion-card-title>
 
     </ion-card-header>
     <ion-card-content>
-      <canvas id="myChartDon"></canvas>
+      <canvas id="myChartDon">{{chartDon}}</canvas>
     </ion-card-content>
 
     <ion-button fill="outline" (click)="masDetallesConsumido()"><ion-icon name="add"></ion-icon>Mas detalles</ion-button>
 
   </ion-card>
+
    <br>
    <br>
 
@@ -26,14 +29,25 @@
       <!-- <ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br> -->
     </ion-card-header>
     <ion-card-content>
-      <canvas id="myChart"></canvas>
+      <canvas id="myChartBar">{{chartBar}}</canvas>
     </ion-card-content>
 
-    <ion-button fill="outline" (click)="this.dataservice.mostrarFactura(factura)"> Mas detalles</ion-button>
+    <ion-button fill="outline" (click)="masDetallesUltimaFactura()"> Mas detalles</ion-button>
 
   </ion-card>
-    <ion-item>
-      <ion-card class="content-card" *ngFor="let factura of facturas">
+
+
+
+
+
+
+
+
+  <!--
+=======
+>>>>>>> master
+    <ion-item *ngFor="let factura of facturas">
+      <ion-card class="content-card">
         <ion-card-content class="container-inside-card">
           <ion-card-content class="container-icon-card">
 
@@ -46,5 +60,5 @@
           </ion-card-content>
         </ion-card-content>
       </ion-card>
-    </ion-item>
+    </ion-item> -->
 </ion-content>
