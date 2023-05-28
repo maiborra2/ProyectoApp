@@ -99,36 +99,6 @@ export class PerfilPage implements OnInit {
   }
 
 
-  /*async cerrarSesion() {
-    const updatedUserDto: Partial<User> = {
-      inicio_sesion: false
-    };
-    let idUser
-    let userJson
-    await Preferences.get({key: 'user'}).then(data => userJson = data)
-    if (userJson != undefined){
-      idUser = JSON.parse(userJson)._id;
-      //faltaria tener el id del usuario y ponerlo en "idUser"
-      this.dataService.updateUser(idUser,updatedUserDto ).subscribe(
-        () => {
-          console.log('Problema enviado con éxito');
-        },
-        (error) => {
-          console.error('Error al enviar el problema', error);
-        }
-      );
-    }
-    else {
-      let toast = await this.toastController.create({
-        message: "Ha habido un error",
-        duration: 2000,
-        position: "bottom"
-      })
-
-      await toast.present()
-    }
-  }*/
-
   //FUNCION PARA ENVIAR LOS PROBLEMAS
   async updateProblem(problema: string) {
     const updatedUserDto: Partial<User> = {

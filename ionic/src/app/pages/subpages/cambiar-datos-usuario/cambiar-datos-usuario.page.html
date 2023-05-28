@@ -10,14 +10,12 @@
 
   <div id="container" class="ion-text-center">
     <ion-input class="ion-text-center" readonly="true" fill="outline" label="Contraseña" label-placement="stacked" [value]="contrasenya" type="password"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked" [value]="email"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked" [value]="telefono"></ion-input>
+    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked" [value]="email" [(ngModel)]="email"></ion-input>
+    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked" [value]="telefono" [(ngModel)]="telefono"></ion-input>
     <ion-button (click)="restablecerContrasenyaAlert()">
       Restablecer contraseña
     </ion-button>
-    <ion-button>
-      Guardar cambios
-    </ion-button>
+    <ion-button (click)="guardarCambios()">Guardar cambios</ion-button>
   </div>
 
 </ion-content>

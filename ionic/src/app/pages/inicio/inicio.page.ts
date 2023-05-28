@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import { User } from 'src/app/common/User';
 import Chart from 'chart.js/auto';
+import {Preferences} from "@capacitor/preferences";
 
 @Component({
   selector: 'app-inicio',
@@ -22,21 +23,30 @@ export class InicioPage implements OnInit {
 
    }
   ngOnInit() {
-    const userId = '645a046240cc99c1c82a2db1';
-    this.loadUserAndFacturas(userId);
+    //const userId = '645a046240cc99c1c82a2db1';
+    this.cargarDatos();
     this.generateChart();
     this.genChartDonut();
 
   }
 
-  private loadFacturas(userId: string) {
-    this.dataservice.getFacturasPorUser(userId).subscribe(
-      (data: Factura[]) => {
-        this.facturas = data;
-        console.log(this.facturas);
+  async cargarDatos(){
+    let idUser: string='';
+    let userJson
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value)
+    if (userJson != undefined){
+      idUser = userJson
+    }
+    this.dataservice.getUser(idUser).subscribe(
+      (user: User) => {
+        this.user = user;
+        this.facturas = user.facturas;
+
+        console.log('Usuario:', this.user);
+        console.log('Facturas:', this.facturas);
       },
       (error) => {
-        console.error('Error al cargar las inicio:', error);
+        console.error('Error al cargar el usuario:', error);
       }
     );
   }
@@ -44,11 +54,11 @@ export class InicioPage implements OnInit {
     this.dataservice.getUser(userId).subscribe(
       (user: User) => {
         this.user = user;
-        console.log('Usuario:', user); // Verificar si se obtiene el usuario correctamente
+        console.log('Usuario:', user);
 
         // Obtener las facturas del usuario
         this.facturas = user.facturas;
-        console.log('Facturas:', this.facturas); // Verificar si se obtienen las facturas correctamente
+        console.log('Facturas:', this.facturas);
       },
       (error) => {
         console.error('Error al cargar el usuario:', error);

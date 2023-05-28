@@ -40,7 +40,27 @@ export class CambiarDatosUsuarioPage implements OnInit {
   }
 
   async guardarCambios (){
+    const updatedUserDto: Partial<User> = {
+      email: this.email,
+      telefono: this.telefono
+    };
+    let idUser: string = '';
+    let userJson;
+    await Preferences.get({ key: 'user' }).then((data) => (userJson = data.value));
+    if (userJson != undefined) {
+      idUser = userJson;
+    }
+    this.dataService.updateUser(idUser, updatedUserDto).subscribe(
+      (user: User) => {
+        this.email = user.email;
+        this.telefono = user.telefono;
 
+        console.log('Usuario actualizado:', user);
+      },
+      (error) => {
+        console.error('Error al actualizar el usuario:', error);
+      }
+    );
   }
 
    async restablecerContrasenya() {

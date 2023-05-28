@@ -27,6 +27,7 @@ export class IncidenciasPage implements OnInit {
     this.dataService.getUser(idUser).subscribe(
       {next: value => {
           this.incidencias = value.info_problemas
+          console.log("esto es una prueba")
         }
       }
     )
