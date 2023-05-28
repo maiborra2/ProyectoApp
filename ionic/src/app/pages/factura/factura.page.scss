@@ -1,6 +1,7 @@
 ion-card-content {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 ion-card-content > *{
@@ -31,3 +32,5 @@ ion-button {
 ion-button > ion-icon {
   margin-right: 0.5rem;
 }
+
+
