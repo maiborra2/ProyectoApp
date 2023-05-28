@@ -17,6 +17,14 @@ export class UsersController {
         }
         return { message: 'Credenciales inválidas' };
     }
+    @Get('user/verificacion/:email')
+    async verificacion(@Param('email') email: string) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
+        if (user) {
+            return  user;
+        }
+        return { message: 'Credenciales inválidas' };
+    }
 
     @Put('user/logout/:idUser')
     async logout(@Param('idUser') idUser: string) {

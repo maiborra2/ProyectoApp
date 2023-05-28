@@ -20,6 +20,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loadEmpresa();
+    Preferences.get({key: 'user'}).then(data => {
+      console.log(data.value)
+      if (data.value != null) this.router.navigateByUrl("menu")
+    })
     //this.iniciarSesion();
 
   }

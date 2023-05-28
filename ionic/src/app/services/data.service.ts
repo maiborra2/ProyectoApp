@@ -37,6 +37,10 @@ export class DataService {
     return this.http.get<User>(`${this.BASE_URL}/user/login/`+email);
   }
 
+  verificacionUser(email: string): Observable<User> {
+    return this.http.get<User>(`${this.BASE_URL}/user/login/`+email);
+  }
+
   logoutUser(idUser: string): Observable<any> {
     return this.http.put<any>(`${this.BASE_URL}/user/logout/${idUser}`, {});
   }

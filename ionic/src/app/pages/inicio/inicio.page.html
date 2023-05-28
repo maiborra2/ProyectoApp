@@ -29,11 +29,11 @@
       <canvas id="myChart"></canvas>
     </ion-card-content>
 
-    <ion-button fill="outline" (click)="masDetallesUltimaFactura()"> Mas detalles</ion-button>
+    <ion-button fill="outline" (click)="this.dataservice.mostrarFactura(factura)"> Mas detalles</ion-button>
 
   </ion-card>
-    <ion-item *ngFor="let factura of facturas">
-      <ion-card class="content-card">
+    <ion-item>
+      <ion-card class="content-card" *ngFor="let factura of facturas">
         <ion-card-content class="container-inside-card">
           <ion-card-content class="container-icon-card">
 

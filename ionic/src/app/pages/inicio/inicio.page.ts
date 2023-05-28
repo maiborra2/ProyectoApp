@@ -15,20 +15,16 @@ import {Preferences} from "@capacitor/preferences";
 export class InicioPage implements OnInit {
 
   facturas: Factura[] = [];
+  factura: Factura[] = [];
 
   //esto es un cambio
    user: User | undefined;
-  constructor(private dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
+  constructor(protected dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
 
 
    }
   ngOnInit() {
-    //const userId = '645a046240cc99c1c82a2db1';
     this.cargarDatos();
-    //this.generateChart();
-    //this.generateChart();
-    //this.genChartDonut();
-
   }
 
   async cargarDatos(){
@@ -42,25 +38,11 @@ export class InicioPage implements OnInit {
       (user: User) => {
         this.user = user;
         this.facturas = user.facturas;
+        this.factura = this.facturas.slice(-1);
 
         console.log('Usuario:', this.user);
-        console.log('Facturas:', this.facturas);
+        console.log('Facturas:', this.factura);
         this.generateChart();
-      },
-      (error) => {
-        console.error('Error al cargar el usuario:', error);
-      }
-    );
-  }
-  private loadUserAndFacturas(userId: string) {
-    this.dataservice.getUser(userId).subscribe(
-      (user: User) => {
-        this.user = user;
-        console.log('Usuario:', user);
-
-        // Obtener las facturas del usuario
-        this.facturas = user.facturas;
-        console.log('Facturas:', this.facturas);
       },
       (error) => {
         console.error('Error al cargar el usuario:', error);
@@ -76,42 +58,7 @@ export class InicioPage implements OnInit {
 
   //grafica
   //grafica Ultima Factura Inicio
-  private generateChart2() {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
 
-    if (ctx) {
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-          datasets: [
-            {
-              label: 'Dinero',
-              data: [100, 200, 150, 120],
-              backgroundColor: 'rgba(0, 123, 255, 0.6)',
-              borderColor: 'rgba(0, 123, 255, 1)',
-              borderWidth: 1,
-            },
-            {
-              label: 'Gasto de kW',
-              data: [50, 80, 60, 70],
-              backgroundColor: 'rgba(255, 0, 0, 0.6)',
-              borderColor: 'rgba(255, 0, 0, 1)',
-              borderWidth: 1,
-            }
-          ]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-    }
-  }
 
   private generateChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;

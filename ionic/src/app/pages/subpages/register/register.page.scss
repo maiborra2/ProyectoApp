@@ -2,6 +2,7 @@
 }
 .scroll-content{
   margin-top:10px;
+
   height: 100%;
 }
 .ion-text-center{
@@ -10,5 +11,11 @@
 
 ion-content {
   flex-grow: 1;
+}
+ion-input{
+  margin: 1rem;
+}
+ion-button{
+  margin: 2rem;
 }
 

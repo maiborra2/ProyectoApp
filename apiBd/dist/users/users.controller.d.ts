@@ -6,6 +6,9 @@ export declare class UsersController {
     login(email: string): Promise<import("./interfaces/user/user.interface").User | {
         message: string;
     }>;
+    verificacion(email: string): Promise<import("./interfaces/user/user.interface").User | {
+        message: string;
+    }>;
     logout(idUser: string): Promise<{
         message: string;
     }>;

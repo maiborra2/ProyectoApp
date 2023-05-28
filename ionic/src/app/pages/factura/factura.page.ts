@@ -4,6 +4,7 @@ import {DataService} from "../../services/data.service";
 import {Preferences} from "@capacitor/preferences";
 import {User} from "../../common/User";
 import {Factura} from "../../common/Factura";
+import {AlertController} from "@ionic/angular";
 
 
 
@@ -19,7 +20,7 @@ export class FacturaPage implements OnInit {
   //esto es un cambio
   user: User | undefined;
 
-  constructor(protected dataservice: DataService, private router: Router) { }
+  constructor(protected dataservice: DataService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
     this.cargarDatos();
@@ -40,7 +41,6 @@ export class FacturaPage implements OnInit {
       (user: User) => {
         this.user = user;
         this.facturas = user.facturas;
-
         console.log('Usuario:', this.user);
         console.log('Facturas:', this.facturas);
         this.facturas = this.facturas.slice(-3);
@@ -50,5 +50,32 @@ export class FacturaPage implements OnInit {
         console.error('Error al cargar el usuario:', error);
       }
     );
+  }
+
+  async buscarFacturaPorAnyoAlert(){
+    const alert = await this.alertController.create({
+      header: 'Buscar factura por año',
+      buttons: [{
+        text: "buscar",
+        role: "confirm",
+        handler: value => {
+          console.log(value.anyoFactura)
+          this.buscarFactura(value.anyoFactura);
+        }
+      }],
+      inputs: [
+        {
+          name: 'anyoFactura',
+          id: 'anyoFactura',
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async buscarFactura(anyoFactura: string) {
+    this.facturas = [];
+   this.facturas = this.todasFacturas.filter((factura) => factura.anyo_factura.toString() == anyoFactura)
+    console.log(this.facturas)
   }
 }

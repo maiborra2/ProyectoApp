@@ -10,9 +10,9 @@
 
   <div id="container" class="ion-text-center">
     <ion-text>Activa esta opción para verificar las operaciones con tu correo y teléfono.</ion-text>
-    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked"></ion-input>
-    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked"></ion-input>
-    <ion-button>
+    <ion-input class="ion-text-center" fill="outline" label="Correo electrónico" label-placement="stacked" [(ngModel)]="email"></ion-input>
+    <ion-input class="ion-text-center" fill="outline" label="Teléfono" label-placement="stacked" [(ngModel)]="telefono"></ion-input>
+    <ion-button (click)="verificarDatos()">
       Activar
     </ion-button>
   </div>

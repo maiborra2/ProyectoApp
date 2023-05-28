@@ -27,6 +27,13 @@ let UsersController = class UsersController {
         }
         return { message: 'Credenciales inválidas' };
     }
+    async verificacion(email) {
+        const user = await this.userService.findUserByEmailAndPassword(email);
+        if (user) {
+            return user;
+        }
+        return { message: 'Credenciales inválidas' };
+    }
     async logout(idUser) {
         const user = await this.userService.getUser(idUser);
         if (user) {
@@ -65,6 +72,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('user/verificacion/:email'),
+    __param(0, (0, common_1.Param)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "verificacion", null);
 __decorate([
     (0, common_1.Put)('user/logout/:idUser'),
     __param(0, (0, common_1.Param)('idUser')),
