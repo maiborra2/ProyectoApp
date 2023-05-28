@@ -54,17 +54,12 @@ updateCharts() {
   
   const canvas = document.getElementById('myChartLineCA') as HTMLCanvasElement;
   const ctx = canvas.getContext('2d');
-  const semanas: number[] = this.chartData.reduce((acc: number[], factura: Factura) => {
-    const numeroSemanas: number[] = factura.semanas.map((semana: any) => semana.numero_semana);
-    return acc.concat(numeroSemanas);
-  }, []);
-  const consumoKwSemanas: number[] = this.chartData.reduce((acc: number[], factura: Factura) => {
-    const consumoSemanas: number[] = factura.semanas.map((semana: any) => semana.consumoKw_semana);
-    return acc.concat(consumoSemanas);
-  }, []);
+  const semanas = this.facturas.map(factura => factura.semanas.map(semana => semana.numero_semana)).reduce((acc, val) => acc.concat(val), []);
+  const consumoKwSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.consumoKw_semana)).reduce((acc, val) => acc.concat(val), []);
   const labels = ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];
+  
   const data = {
-    labels: labels,
+    labels: semanas,
     datasets: [
       {
         label: 'Consumo actual',

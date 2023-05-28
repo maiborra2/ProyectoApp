@@ -66,6 +66,14 @@ export class DataService {
   getFacturasPagadasPorDNI(dni: string, facturaId: string): Observable<Factura[]> {
     const url = `${this.BASE_URL}/users/${dni}/facturas?pagada=true&id=${facturaId}`;
     return this.http.get<Factura[]>(url);
+
+    
   }
+  getChartData(userId: string): Observable<Factura[]> {
+    const url = `${this.BASE_URL}/users/${userId}`;
+    return this.http.get<Factura[]>(url);
+  }
+  
+
 
 }

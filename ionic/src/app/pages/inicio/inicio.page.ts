@@ -4,7 +4,7 @@ import {DataService} from "../../services/data.service";
 import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import { User } from 'src/app/common/User';
-import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js';
 import { AfterViewInit } from '@angular/core';
 
 @Component({
@@ -12,8 +12,9 @@ import { AfterViewInit } from '@angular/core';
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
-export class InicioPage implements OnInit{
+export class InicioPage implements OnInit, AfterViewInit{
 
+  
   facturas: Factura[] = [];
   chartData: Factura[] = [];
   //esto es un cambio
@@ -22,17 +23,26 @@ export class InicioPage implements OnInit{
 
 
    }
-  ngOnInit() {
+ ngOnInit() {
     const userId = '645a046240cc99c1c82a2db1';
     this.loadUserAndFacturas(userId);
 //<<<<<<< HEAD
+
+   
+  } 
+  
+/*
+  ngAfterViewInit() {
+    const userId = '645a046240cc99c1c82a2db1';
+    this.loadUserAndFacturas(userId);
     this.loadData(userId);
     this.updateCharts();
-  }
+  }*/
 
-/*   ngAfterViewInit() {
+   ngAfterViewInit() {
+    
     this.updateCharts();
-  } */
+  } 
 
 
   private loadFacturas(userId: string) {
@@ -55,7 +65,8 @@ export class InicioPage implements OnInit{
         // Obtener las facturas del usuario
         this.facturas = user.facturas;
         console.log('Facturas:', this.facturas); // Verificar si se obtienen las facturas correctamente
-        this.updateCharts();
+        this.loadData(userId);
+        
       },
       (error) => {
         console.error('Error al cargar el usuario:', error);
@@ -94,11 +105,19 @@ export class InicioPage implements OnInit{
     // Actualiza las gráficas utilizando los datos obtenidos de la API (this.chartData)
     //GRAFICA DONUT
     const canvas = document.getElementById('myChartDon') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
+    console.log(canvas);
+    const ctxDon = canvas.getContext('2d');
 
     const myChartColors = ['#98FB98', '#4682B4' ];
     const consumoMes = this.chartData.length > 0 ? this.chartData[0].consumoKw_mes : 0;
     const costeMes = this.chartData.length > 0 ? this.chartData[0].coste_mes : 0;
+
+    /* const labelsDon = this.chartData.map(factura => `${factura.mes_factura} ${factura.anyo_factura}`);
+    const dataConsumoDon = this.chartData.map(factura => factura.consumoKw_mes);
+    const dataCosteDon = this.chartData.map(factura => factura.coste_mes); */
+
+    console.log(this.chartData)
+    
     const dataDon = {
       labels: ['Potencia','Consumo' ],
       datasets: [
@@ -110,8 +129,8 @@ export class InicioPage implements OnInit{
       ]
     };
 
-    if (ctx) {
-      new Chart(ctx, {
+    if (ctxDon) {
+      new Chart(ctxDon, {
 //<<<<<<< HEAD
         type: 'doughnut',
         data: dataDon,
@@ -134,11 +153,12 @@ export class InicioPage implements OnInit{
 
 
 
-    if (ctx) {
+    
        // Obtén los datos de número de semana, consumoKw_semana y coste_semana de las facturas en this.chartData
     const canvas2 = document.getElementById('myChartBar') as HTMLCanvasElement;
+    console.log(canvas2);
     const ctx2 = canvas2.getContext('2d');
-    if (ctx2) {
+  if (ctx2) {
     const semanas = this.facturas.map(factura => factura.semanas.map(semana => semana.numero_semana)).reduce((acc, val) => acc.concat(val), []);
     const consumoKwSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.consumoKw_semana)).reduce((acc, val) => acc.concat(val), []);
     const costeSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.coste_semana)).reduce((acc, val) => acc.concat(val), []);
@@ -150,7 +170,7 @@ export class InicioPage implements OnInit{
           datasets: [
             {
               label: 'Dinero',
-              data: costeSemanas.reduce,
+              data: costeSemanas,
               backgroundColor: myChartColors,
               borderColor: 'rgba(0, 123, 255, 1)',
               borderWidth: 1,
@@ -158,7 +178,7 @@ export class InicioPage implements OnInit{
             {
               label: 'Gasto de kW',
 //<<<<<<< HEAD
-              data: consumoKwSemanas.reduce,
+              data: consumoKwSemanas,
               backgroundColor: myChartColors,
               borderColor: 'rgba(255, 0, 0, 1)',
               borderWidth: 1,
@@ -178,5 +198,5 @@ export class InicioPage implements OnInit{
 //<<<<<<< HEAD
   }
 
-    }
+ 
 
