@@ -16,6 +16,7 @@ import {AlertController} from "@ionic/angular";
 export class FacturaPage implements OnInit {
   facturas: Factura[] = [];
   todasFacturas: Factura[] = [];
+  //
 
   //esto es un cambio
   user: User | undefined;
