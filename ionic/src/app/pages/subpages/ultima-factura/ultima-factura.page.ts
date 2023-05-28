@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto';
 import { Factura } from 'src/app/common/Factura';
+import {DataService} from "../../../services/data.service";
+import { User } from 'src/app/common/User';
+import { Chart } from 'chart.js';
 
+import {Preferences} from "@capacitor/preferences";
 
 
 @Component({
@@ -10,41 +13,49 @@ import { Factura } from 'src/app/common/Factura';
   styleUrls: ['./ultima-factura.page.scss'],
 })
 export class UltimaFacturaPage implements OnInit {
-  factura: Factura;
-  constructor() {
+  facturas: Factura[] = [];
+  //esto es un cambio
+  user: User | undefined;
+  constructor(private dataservice: DataService) {
     // Utiliza la interfaz Factura en el constructor para inicializar la propiedad factura
-    this.factura = {
-      user: 'Aurelio Botijo',
-      mes_factura: 'Mayo',
-      anyo_factura: 2023,
-      consumoKw_mes: 100,
-      coste_mes: 50,
-      fecha_inicio_mes: 1620144000,
-      fecha_fin_mes: 1622822399,
-      pagada:true,
-      semanas: [
-        {
-          numero_semana: 1,
-          consumoKw_semana: 30,
-          coste_semana: 15,
-        },
-        // Otras semanas...
-      ],
-    };
   }
 
 
 
   //graficas
   ngOnInit() {
-    this.lineChartUF(); // Llamar al método para generar la gráfica
-    this.genChartDonutUF();
+     // Llamar al método para generar la gráfica
+    this.cargarDatos();
 
 
   }
 
+  async cargarDatos(){
+    let idUser: string='';
+    let userJson
+    await Preferences.get({key: 'user'}).then(data => userJson = data.value)
+    if (userJson != undefined){
+      idUser = userJson
+    }
+    this.dataservice.getUser(idUser).subscribe(
+      (user: User) => {
+        this.user = user;
+        this.facturas = user.facturas;
+
+        console.log('Usuario:', this.user);
+        console.log('Facturas:', this.facturas);
+
+        this.genChartDonutUF();
+        this.BarChartUF();
+      },
+      (error) => {
+        console.error('Error al cargar el usuario:', error);
+      }
+    );
+  }
+
   //grafica Consumo semanal
-  private lineChartUF() {
+ /* private lineChartUF() {
     const DATA_COUNT = 4;
     const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 24 };
     const canvas = document.getElementById('myChartLineUF') as HTMLCanvasElement;
@@ -88,24 +99,10 @@ export class UltimaFacturaPage implements OnInit {
         }
       });
     }
-  }
-//opacidad
-  private transparentizeColor(color: string, opacity: number): string {
-    const rgbColor = this.hexToRgb(color);
-    return `rgba(${rgbColor.r}, ${rgbColor.g}, ${rgbColor.b}, ${opacity})`;
-  }
-
-  // Convertir un color en formato hexadecimal a RGB
-  private hexToRgb(hex: string): { r: number, g: number, b: number } {
-    const normalizedHex = hex.replace('#', '');
-    const r = parseInt(normalizedHex.substring(0, 2), 16);
-    const g = parseInt(normalizedHex.substring(2, 4), 16);
-    const b = parseInt(normalizedHex.substring(4, 6), 16);
-    return { r, g, b };
-  }
+  }*/
 
 
-  private genChartDonutUF() {
+  private genChartDonutUF123() {
     const canvas = document.getElementById('myChartDonUF') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
     const myChartColors = ['#98FB98', '#FFD700'	,'#FF8C00' ,'#4682B4' ];
@@ -142,6 +139,94 @@ export class UltimaFacturaPage implements OnInit {
     }
   }
 
+
+  private genChartDonutUF() {
+    const canvas = document.getElementById('myChartDonUF') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    const myChartColors = ['#98FB98', '#4682B4','#f8d10e', '#fc642d' ];
+    //const labelsDon = this.chartData.map(factura => `${factura.mes_factura} ${factura.anyo_factura}`);
+
+
+    if (ctx && this.facturas.length > 0) {
+
+      const ultimaFactura = this.facturas[0]; // Obtener la última factura del array
+      const semanas = ultimaFactura.semanas.map(semana => `Semana ${semana.numero_semana}`);
+      const costoKwSemana = ultimaFactura.semanas.map(semana => semana.consumoKw_semana);
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Potencia','Consumo', 'Impuesto de electricidad' ],
+          datasets: [
+            {
+              label: 'Euros',
+              data: [ultimaFactura.coste_mes,costoKwSemana[1],costoKwSemana[2]],
+              backgroundColor: myChartColors,
+              borderColor: myChartColors,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: ''
+            }
+          }
+        }
+      });
+    }
+  }
+
+
+
+
+
+  private BarChartUF() {
+    const canvas = document.getElementById('myChartLineUF') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+
+    if (ctx && this.facturas.length > 0) {
+      const ultimaFactura = this.facturas[0]; // Obtener la última factura del array
+
+      const semanas = ultimaFactura.semanas.map(semana => `Semana ${semana.numero_semana}`);
+      const costoKwSemana = ultimaFactura.semanas.map(semana => semana.consumoKw_semana);
+      const costoSemana = ultimaFactura.semanas.map(semana => semana.coste_semana);
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: semanas,
+          datasets: [
+            {
+              label: 'Gasto de kW por semana',
+              data: costoKwSemana,
+              backgroundColor: 'rgba(0, 123, 255, 0.6)',
+              borderColor: 'rgba(0, 123, 255, 1)',
+              borderWidth: 1,
+            },
+            {
+              label: 'Gasto mas bajo',
+              data: costoSemana,
+              backgroundColor: 'rgba(255, 0, 0, 0.6)',
+              borderColor: 'rgba(255, 0, 0, 1)',
+              borderWidth: 1,
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  }
 
 
 

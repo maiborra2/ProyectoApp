@@ -5,14 +5,14 @@
   <ion-text><h1>Hola, {{ getNombreCompleto() }}</h1></ion-text>
 
 
- 
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Gasto economico actual:</ion-card-title>
 
     </ion-card-header>
     <ion-card-content>
-      <canvas id="myChartDon"></canvas>
+      <canvas id="myChartDon">{{chartDon}}</canvas>
     </ion-card-content>
 
     <ion-button fill="outline" (click)="masDetallesConsumido()"><ion-icon name="add"></ion-icon>Mas detalles</ion-button>
@@ -21,7 +21,7 @@
 
    <br>
    <br>
-   
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Ultima factura: </ion-card-title>
@@ -29,12 +29,13 @@
       <!-- <ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br> -->
     </ion-card-header>
     <ion-card-content>
-      <canvas id="myChartBar"></canvas>
+      <canvas id="myChartBar">{{chartBar}}</canvas>
     </ion-card-content>
 
     <ion-button fill="outline" (click)="masDetallesUltimaFactura()"> Mas detalles</ion-button>
 
   </ion-card>
+
 
 
 

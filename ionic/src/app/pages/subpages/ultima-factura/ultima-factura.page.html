@@ -9,25 +9,36 @@
 
 <ion-content>
   <!-- Contenido de la página "Última Factura" -->
+
   <ion-card>
     <ion-card-header>
+      <ion-item *ngFor="let factura of facturas">
       <ion-card-title>Consumo semanal:</ion-card-title>
       <ion-card-subtitle><ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br></ion-card-subtitle>
+      </ion-item>
     </ion-card-header>
+
     <ion-card-content>
       <canvas id="myChartLineUF"></canvas>
     </ion-card-content>
   </ion-card>
 
+
+
   <ion-card>
+    <ion-item *ngFor="let factura of facturas">
     <ion-card-header>
       <ion-card-title>Datos de pago:</ion-card-title>
+
       <ion-card-subtitle><ion-label class="label">Mes: {{factura.mes_factura}}, {{factura.anyo_factura}}</ion-label><br></ion-card-subtitle>
-    </ion-card-header>
+      </ion-card-header><h1>Total: {{factura.coste_mes}}€</h1>  </ion-item>
     <ion-card-content>
-      <h1>Total: {{factura.coste_mes}} €</h1>
+
+
       <canvas id="myChartDonUF"></canvas>
     </ion-card-content>
     <ion-button fill="outline" ><ion-icon name="add"></ion-icon>Descargar factura en PDF</ion-button><!-- (click)="masDetallesConsumido()" -->
   </ion-card>
+
+
 </ion-content>
