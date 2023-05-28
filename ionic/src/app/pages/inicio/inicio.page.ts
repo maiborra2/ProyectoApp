@@ -5,16 +5,17 @@ import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import { User } from 'src/app/common/User';
 import Chart from 'chart.js/auto';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
-export class InicioPage implements OnInit {
-
+export class InicioPage implements OnInit{
+  
   facturas: Factura[] = [];
-
+  chartData: Factura[] = [];
   //esto es un cambio
   constructor(private dataservice: DataService, private router: Router , private activatedRoute: ActivatedRoute) {
 
@@ -25,10 +26,14 @@ export class InicioPage implements OnInit {
   ngOnInit() {
     const userId = '645a046240cc99c1c82a2db1';
     this.loadUserAndFacturas(userId);
-    this.generateChart();
-    this.genChartDonut();
-   
+    this.loadData(userId);
+    this.updateCharts();
   }
+
+/*   ngAfterViewInit() {
+    this.updateCharts();
+  } */
+
 
   private loadFacturas(userId: string) {
     this.dataservice.getFacturasPorUser(userId).subscribe(
@@ -49,6 +54,7 @@ export class InicioPage implements OnInit {
         // Obtener las facturas del usuario
         this.facturas = user.facturas;
         console.log('Facturas:', this.facturas); // Verificar si se obtienen las facturas correctamente
+        this.updateCharts();
       },
       (error) => {
         console.error('Error al cargar el usuario:', error);
@@ -56,28 +62,94 @@ export class InicioPage implements OnInit {
     );
   }
 
-  //grafica Ultima Factura Inicio
-  private generateChart() {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+  //navegacion para mas detalles
+  masDetallesConsumido(){
+    this.router.navigate(['/consumo-actual']);
+  }
+  masDetallesUltimaFactura(){
+    this.router.navigate(['/ultima-factura']);
+  } 
+
+  loadData(userId: string) {
+    this.dataservice.getChartData(userId).subscribe(
+      (data: Factura[]) => {
+        this.chartData = data;
+        // Llama a la función para actualizar las gráficas con los datos recibidos
+        this.updateCharts();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  updateCharts() {
+    // Actualiza las gráficas utilizando los datos obtenidos de la API (this.chartData)
+    //GRAFICA DONUT
+    const canvas = document.getElementById('myChartDon') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d');
+
+    const myChartColors = ['#98FB98', '#4682B4' ];
+    const consumoMes = this.chartData.length > 0 ? this.chartData[0].consumoKw_mes : 0;
+    const costeMes = this.chartData.length > 0 ? this.chartData[0].coste_mes : 0;
+    const dataDon = {
+      labels: ['Potencia','Consumo' ],
+      datasets: [
+        {
+          label: 'Euros',
+          data: [consumoMes, costeMes],
+          backgroundColor: myChartColors,
+        }
+      ]
+    };
 
     if (ctx) {
       new Chart(ctx, {
-        type: 'bar', //pie si la queremos redonda
+        type: 'doughnut',
+        data: dataDon,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: ''
+            }
+          }
+        }
+      });
+    }
+
+    // GRAFICA BARRA
+
+
+    
+    if (ctx) {
+       // Obtén los datos de número de semana, consumoKw_semana y coste_semana de las facturas en this.chartData
+    const canvas2 = document.getElementById('myChartBar') as HTMLCanvasElement;
+    const ctx2 = canvas2.getContext('2d');
+    if (ctx2) {
+    const semanas = this.facturas.map(factura => factura.semanas.map(semana => semana.numero_semana)).reduce((acc, val) => acc.concat(val), []);
+    const consumoKwSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.consumoKw_semana)).reduce((acc, val) => acc.concat(val), []);
+    const costeSemanas = this.facturas.map(factura => factura.semanas.map(semana => semana.coste_semana)).reduce((acc, val) => acc.concat(val), []);
+    
+      new Chart(ctx2, {
+        type: 'bar',
         data: {
-          labels: ['Semana 1', 'semana 2', 'semana 3', 'semana 4'],
+          labels: semanas,
           datasets: [
             {
               label: 'Dinero',
-              data: [12, 23, 25, 15],
-              backgroundColor: 'rgba(0, 123, 255, 0.6)',
+              data: costeSemanas.reduce,
+              backgroundColor: myChartColors,
               borderColor: 'rgba(0, 123, 255, 1)',
               borderWidth: 1,
             },
             {
               label: 'Gasto de kW',
-              data: [50, 70 ,60 ,70],
-              backgroundColor: 'rgba(255, 0, 0, 0.6)',
+              data: consumoKwSemanas.reduce,
+              backgroundColor: myChartColors,
               borderColor: 'rgba(255, 0, 0, 1)',
               borderWidth: 1,
             }
@@ -93,50 +165,6 @@ export class InicioPage implements OnInit {
       });
     }
   }
-  // Grafica gasto economico actual 
-  private genChartDonut() {
-    const canvas = document.getElementById('myChartDon') as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d');
-    const myChartColors = ['#98FB98', '#4682B4' ];
-    
-   
-    const data = {
-      labels: ['Potencia','Consumo' ],
-      datasets: [
-        {
-          label: 'Euros',
-          data: [40, 60],
-          backgroundColor: myChartColors,
-        }
-      ]
-    };
-  
-    if (ctx) {
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: ''
-            }
-          }
-        }
-      });
-    }
   }
-
-  //navegacion para mas detalles
-  masDetallesConsumido(){
-    this.router.navigate(['/consumo-actual']);
-  }
-  masDetallesUltimaFactura(){
-    this.router.navigate(['/ultima-factura']);
-  } 
   
 }

@@ -55,13 +55,13 @@ export class UltimaFacturaPage implements OnInit {
       datasets: [
         {
           label: 'Hora punta',
-          data: this.generateRandomNumbers(NUMBER_CFG),
+          data: [10,10,10,10],
           borderColor: myChartColors[0],
           backgroundColor: this.transparentizeColor(myChartColors[0], 0.5),
         },
         {
           label: 'Hora valle',
-          data: this.generateRandomNumbers(NUMBER_CFG),
+          data: [20,20,20,20],
           borderColor: myChartColors[1],
           backgroundColor: this.transparentizeColor(myChartColors[1], 0.5),
         }
@@ -77,7 +77,7 @@ export class UltimaFacturaPage implements OnInit {
           responsive: true,
           plugins: {
             legend: {
-              position: 'top',
+              position: 'bottom',
             },
             title: {
               display: true,
@@ -87,16 +87,6 @@ export class UltimaFacturaPage implements OnInit {
         }
       });
     }
-  }
-
-//generador de randoms para la grafica
-  private generateRandomNumbers(config: { count: number, min: number, max: number }): number[] {
-    const numbers: number[] = [];
-    for (let i = 0; i < config.count; i++) {
-      const number = Math.floor(Math.random() * (config.max - config.min + 1)) + config.min;
-      numbers.push(number);
-    }
-    return numbers;
   }
 //opacidad
   private transparentizeColor(color: string, opacity: number): string {

@@ -8,6 +8,8 @@ import { User } from '../common/User';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DataService {
   BASE_URL = 'http://localhost:3000/api';
 
@@ -24,4 +26,9 @@ export class DataService {
   getUser(idUser: string): Observable<User> {
     return this.http.get<User>(this.BASE_URL+'/users/'+idUser);
 }
+
+getChartData(idUser: string): Observable<Factura[]> {
+  return this.http.get<Factura[]>(this.BASE_URL + '/users/' + idUser);
+}
+
 }
